@@ -16,7 +16,7 @@ const NavBar = (props: Props) => {
 
 	// Function to determine the appropriate logo based on the theme
 	const getLogoSource = () => {
-		return theme === "dark" ? "/logoWhite.png" : "/logoBlack.png";
+		return theme === "light" ? "/logoBlack.png" : "/logoWhite.png";
 	};
 
 	return (
