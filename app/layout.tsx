@@ -19,10 +19,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" className="" suppressHydrationWarning>
-			<body className={inter.className}>
-				<ThemeProvider attribute="class" defaultTheme="system">
+			<body
+				className={`${inter.className}`}>
+				<ThemeProvider attribute="class">
 					<NavBar />
-					<main>{children}</main>
+					<main className="">{children}</main>
 				</ThemeProvider>
 			</body>
 		</html>

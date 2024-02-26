@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { TbMenu } from "react-icons/tb";
 import { NavLinks } from "@/lib/links";
 import { ThemeToggle } from "./ThemeToggle";
@@ -9,11 +9,9 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 
-type Props = {};
-
-const NavBar = (props: Props) => {
-	const { theme } = useTheme();
-
+type Theme = "light" | "dark";
+const NavBar = () => {
+	const [theme, setThemes] = useState<Theme>("light");
 	// Function to determine the appropriate logo based on the theme
 	const getLogoSource = () => {
 		return theme === "light" ? "/logoBlack.png" : "/logoWhite.png";
@@ -77,7 +75,7 @@ const NavBar = (props: Props) => {
 						transition: { type: "spring", stiffness: 150, damping: 7 },
 					}}>
 					<motion.div className="ml-4 cursor-pointer">
-						<ThemeToggle />
+						<ThemeToggle setThemes={setThemes} theme={theme} />
 					</motion.div>
 					<div className="lg:hidden">
 						<Sheet>
