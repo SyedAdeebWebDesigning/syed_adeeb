@@ -1,3 +1,9 @@
+import HeroSection from "@/components/shared/HeroSection";
+
 export default function Home() {
-	return <section className=""></section>;
+	return (
+		<main className="">
+			<HeroSection />
+		</main>
+	);
 }
