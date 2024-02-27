@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
+import { gsap } from "gsap";
+import Bounded from "./Bounded";
+import Shapes from "../shapes/HeroShapes";
 type Props = {};
 
 const HeroSection = (props: Props) => {
@@ -50,37 +52,43 @@ const HeroSection = (props: Props) => {
 
 	const firstName: string = "Syed";
 	const lastName: string = "Adeeb";
-	const tagLine: string = "FULL STACK DEVELOPER";
+	const tagLine: string = "FULL-STACK DEVELOPER";
 
 	const renderLetters = (name: string, key: string) => {
 		if (!name) return;
 		return name.split("").map((letter, index) => (
 			<span
 				key={index}
-				className={`name-animation name-animation-${key}-index inline-block opacity-0 transition-all duration-200 hover:text-bounce`}>
+				className={`name-animation border border-transparent text-stroke-light dark:text-stroke-dark hover:text-transparent name-animation-${key}-index inline-block opacity-0 transition-all duration-200 hover:text-bounce ${
+					key === "last" &&
+					"text-shadow-light-sm dark:text-shadow-dark-sm lg:text-shadow-light lg:dark:text-shadow-dark text-shadow-none dark:text-shadow-none"
+				}`}>
 				{letter}
 			</span>
 		));
 	};
 
 	return (
-		<section className="max-w-[85%] w-full mx-auto" ref={component}>
-			<div className="grid min-h-[70vh] grid-cols-1 md:grid-cols-2">
-				<div className="col-start-1 md:row-start-1">
-					<h1 className="mt-20 mb-8 text-hero-sm lg:text-hero font-extrabold leading-none">
-						<span className="block text-gray-700 dark:text-[#c9c9c9] hover:text-teal-500">
+		<Bounded className="max-w-[85%] w-full mx-auto" ref={component}>
+			<div className="grid min-h-[70vh] grid-cols-1 lg:grid-cols-2">
+				<div className="hidden lg:block">
+					<Shapes />
+				</div>
+				<div className="col-start-1 md:row-start-1 ">
+					<h1 className="md:mt-20 mb-8 text-hero font-extrabold leading-[70px] md:leading-none text-left">
+						<span className="block text-gray-700 dark:text-[#c9c9c9] ">
 							{renderLetters(firstName, "first")}
 						</span>
-						<span className="-mt-[.2em] block text-teal-500">
+						<span className="md:-mt-[.2em] block text-teal-500">
 							{renderLetters(lastName, "last")}
 						</span>
 					</h1>
-					<span className="block job-title bg-gradient-to-tr from-gray-500 via-slate-800 to-gray-500 dark:from-gray-400 dark:via-slate-200 dark:to-slate-400 bg-clip-text text-2xl font-bold uppercase tracking-[.2em] text-transparent opacity-1 md:text-4xl">
+					<span className="block job-title bg-gradient-to-tr from-gray-500 via-slate-800 to-gray-500 dark:from-gray-400 dark:via-slate-200 dark:to-slate-400 bg-clip-text text-2xl font-bold uppercase tracking-[.2em] text-transparent text-left opacity-1 md:text-4xl">
 						{tagLine}
 					</span>
 				</div>
 			</div>
-		</section>
+		</Bounded>
 	);
 };
 
