@@ -15,12 +15,14 @@ const HeroSection = (props: Props) => {
 			tl.fromTo(
 				".name-animation",
 				{
+					x: 0,
 					y: 20,
 					opacity: 0,
-					scale: 5,
+					scale: 3,
 				},
 				{
 					opacity: 1,
+					x: 0,
 					y: 0,
 					duration: 0.1,
 					scale: 1,
@@ -52,7 +54,7 @@ const HeroSection = (props: Props) => {
 
 	const firstName: string = "Syed";
 	const lastName: string = "Adeeb";
-	const tagLine: string = "FULL-STACK DEVELOPER";
+	const tagLine: string = "FULL-STACK DEVELOPER.";
 
 	const renderLetters = (name: string, key: string) => {
 		if (!name) return;
@@ -61,7 +63,7 @@ const HeroSection = (props: Props) => {
 				key={index}
 				className={`name-animation border border-transparent text-stroke-light dark:text-stroke-dark hover:text-transparent name-animation-${key}-index inline-block opacity-0 transition-all duration-200 hover:text-bounce ${
 					key === "last" &&
-					"text-shadow-light-sm dark:text-shadow-dark-sm lg:text-shadow-light lg:dark:text-shadow-dark text-shadow-none dark:text-shadow-none"
+					"text-shadow-light-sm dark:text-shadow-dark-sm  lg:text-shadow-light lg:dark:text-shadow-dark text-shadow-none dark:text-shadow-none"
 				}`}>
 				{letter}
 			</span>
@@ -79,7 +81,7 @@ const HeroSection = (props: Props) => {
 						<span className="block text-gray-700 dark:text-[#c9c9c9] ">
 							{renderLetters(firstName, "first")}
 						</span>
-						<span className="md:-mt-[.2em] block text-teal-500">
+						<span className="md:-mt-[.2em] block bg-gradient-to-r from-teal-500 to-green-200 bg-clip-text text-teal-400/90">
 							{renderLetters(lastName, "last")}
 						</span>
 					</h1>
