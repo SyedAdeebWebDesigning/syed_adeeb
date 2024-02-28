@@ -19,20 +19,19 @@ const HeroSection = (props: Props) => {
 					x: 0,
 					y: 20,
 					opacity: 0,
-					scale: 3,
+					scale: -1,
 				},
 				{
 					opacity: 1,
 					x: 0,
 					y: 0,
 					duration: 0.1,
-					delay: 0.31,
 					scale: 1,
-					ease: "elastic.out",
+					ease: "elastic.out(1,0.3)",
 					stagger: {
 						each: 0.1,
 						from: "random",
-						amount: 1,
+						yoyo: true,
 					},
 				}
 			);
