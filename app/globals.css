@@ -77,7 +77,9 @@
 		border-bottom-width: 0;
 		background-image: linear-gradient(transparent, transparent),
 			linear-gradient(#fff, #fff);
-		background-size: 0 3px;
+		background-size: 0 100px;
+		padding: 5px 10px;
+		border-radius: 100px;
 		background-position: 0 100%;
 		background-repeat: no-repeat;
 		transition: background-size 0.5s ease-in-out;
@@ -87,10 +89,14 @@
 		background-image: linear-gradient(transparent, transparent),
 			linear-gradient(#009485, #94ffc5);
 	}
+	.link-underline-white {
+		background-image: linear-gradient(transparent, transparent),
+			linear-gradient(#26e5d2, #00fe72, #26e5d2);
+	}
 
 	.link-underline:hover {
-		background-size: 100% 3px;
 		background-position: 0 100%;
+		background-size: 100% 100px;
 	}
 	.translate-left {
 		transform: translateX(-63%);
@@ -127,19 +133,12 @@
 	.text-bounce {
 		animation: bounce 0.51s ease-in-out;
 	}
-	.magicpattern {
-		width: 100%;
-		height: 100%;
-		background-size: cover;
-		background-position: center center;
-		background-repeat: repeat;
-		background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3ClinearGradient id=%22b%22 gradientTransform=%22rotate(-45 .5 .5)%22%3E%3Cstop offset=%220%25%22 stop-color=%22%2308AEEA%22%2F%3E%3Cstop offset=%22100%25%22 stop-color=%22%232AF598%22%2F%3E%3C%2FlinearGradient%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M929 640q-43 140-159.5 235.5t-256.5 55q-140-40.5-262-101t-178.5-195Q16 500 76.5 368T247 147.5q110-88.5 255-95t256.5 86Q870 231 921 365.5t8 274.5Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22url(%23b)%22 d=%22M929 640q-43 140-159.5 235.5t-256.5 55q-140-40.5-262-101t-178.5-195Q16 500 76.5 368T247 147.5q110-88.5 255-95t256.5 86Q870 231 921 365.5t8 274.5Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-	}
+
 	.text-stroke-dark:hover {
-		-webkit-text-stroke: 3px rgb(216, 216, 216);
+		-webkit-text-stroke: 2px rgb(216, 216, 216);
 	}
 	.text-stroke-light:hover {
-		-webkit-text-stroke: 3px black;
+		-webkit-text-stroke: 2px black;
 	}
 	.text-shadow-light {
 		text-shadow: 10px 0px 0px black;

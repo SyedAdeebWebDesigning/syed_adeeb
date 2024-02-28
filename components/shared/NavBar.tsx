@@ -6,7 +6,6 @@ import { TbMenu } from "react-icons/tb";
 import { NavLinks } from "@/lib/links";
 import { ThemeToggle } from "./ThemeToggle";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 
 type Theme = "light" | "dark";
@@ -28,13 +27,15 @@ const NavBar = () => {
 						opacity: 1,
 						transition: { type: "spring", stiffness: 150, damping: 7 },
 					}}>
-					<Image
-						src={getLogoSource()} // Dynamically set the source based on the theme
-						alt="Syed Adeeb"
-						layout="fill"
-						objectFit="contain"
-						className="mx-4 cursor-pointer hover:animate-pulse"
-					/>
+					<Link href={"/"}>
+						<Image
+							src={getLogoSource()} // Dynamically set the source based on the theme
+							alt="Syed Adeeb"
+							layout="fill"
+							objectFit="contain"
+							className="mx-4 cursor-pointer hover:animate-pulse"
+						/>
+					</Link>
 				</motion.div>
 
 				<nav className="">
@@ -59,7 +60,7 @@ const NavBar = () => {
 								}}>
 								<Link
 									href={link.url}
-									className="link link-underline link-underline-black">
+									className="link link-underline link-underline-black dark:link-underline-white font-semibold dark:font-normal transition-all duration-300 ease-in-out">
 									{link.title}
 								</Link>
 							</motion.li>

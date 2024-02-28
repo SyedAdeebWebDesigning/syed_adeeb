@@ -5,6 +5,10 @@ import { gsap } from "gsap";
 import Bounded from "./Bounded";
 import Shapes from "../shapes/HeroShapes";
 import { motion } from "framer-motion";
+import { socialMediaLinks } from "@/lib/links";
+import { SocialIcon } from "react-social-icons";
+import Link from "next/link";
+
 type Props = {};
 
 const HeroSection = (props: Props) => {
@@ -19,7 +23,7 @@ const HeroSection = (props: Props) => {
 					x: 0,
 					y: 20,
 					opacity: 0,
-					scale: -1,
+					scale: -4,
 				},
 				{
 					opacity: 1,
@@ -90,6 +94,35 @@ const HeroSection = (props: Props) => {
 					<span className="block job-title bg-gradient-to-tr from-gray-500 via-slate-800 to-gray-500 dark:from-gray-400 dark:via-slate-200 dark:to-slate-400 bg-clip-text text-2xl font-bold uppercase tracking-[.2em] text-transparent text-left opacity-1 md:text-4xl">
 						{tagLine}
 					</span>
+					<ul className="flex space-x-4 items-center w-full mt-3 justify-start">
+						{socialMediaLinks.map((link, index) => (
+							<motion.li
+								key={index}
+								initial={{ x: -100, opacity: 0 }}
+								aria-label={link.name}
+								animate={{
+									x: 0,
+									opacity: 1,
+								}}
+								transition={{
+									duration: 0.5,
+									delay: index * 0.1, // Staggering delay for each link
+									type: "spring",
+									delayChildren: 2,
+									stiffness: 150,
+									damping: 10,
+								}}>
+								<h3 className="hover:scale-110 transition-all duration-300 ease-in-out">
+									<SocialIcon
+										url={link.link}
+										className=""
+										bgColor="#303030"
+										target="_"
+									/>
+								</h3>
+							</motion.li>
+						))}
+					</ul>
 				</div>
 			</div>
 		</Bounded>
