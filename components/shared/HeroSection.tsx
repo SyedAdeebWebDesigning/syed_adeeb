@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import Bounded from "./Bounded";
 import Shapes from "../shapes/HeroShapes";
+import { motion } from "framer-motion";
 type Props = {};
 
 const HeroSection = (props: Props) => {
@@ -25,11 +26,13 @@ const HeroSection = (props: Props) => {
 					x: 0,
 					y: 0,
 					duration: 0.1,
+					delay: 0.31,
 					scale: 1,
-					ease: "elastic(1,0.3)",
+					ease: "elastic.out",
 					stagger: {
 						each: 0.1,
 						from: "random",
+						amount: 1,
 					},
 				}
 			);
@@ -73,7 +76,7 @@ const HeroSection = (props: Props) => {
 	return (
 		<Bounded className="max-w-[85%] w-full mx-auto" ref={component}>
 			<div className="grid min-h-[70vh] grid-cols-1 lg:grid-cols-2">
-				<div className="hidden lg:block">
+				<div className="hidden lg:block transition-all duration-200 hue-rotate-[10deg] shadow-white">
 					<Shapes />
 				</div>
 				<div className="col-start-1 md:row-start-1 ">
@@ -81,7 +84,7 @@ const HeroSection = (props: Props) => {
 						<span className="block text-gray-700 dark:text-[#c9c9c9] ">
 							{renderLetters(firstName, "first")}
 						</span>
-						<span className="md:-mt-[.2em] block bg-gradient-to-r from-teal-500 to-green-200 bg-clip-text text-teal-400/90">
+						<span className="md:-mt-[.2em] block text-teal-400/90">
 							{renderLetters(lastName, "last")}
 						</span>
 					</h1>

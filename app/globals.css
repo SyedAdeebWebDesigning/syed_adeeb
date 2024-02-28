@@ -71,7 +71,7 @@
 		@apply border-border;
 	}
 	body {
-		@apply transition-colors duration-300 ease-in-out bg-[#ffffff] dark:bg-[#000000];
+		@apply transition-colors duration-300 ease-in-out bg-[#e0e0e0] dark:bg-[#292929];
 	}
 	.link-underline {
 		border-bottom-width: 0;
@@ -114,11 +114,11 @@
 			transform: translateY(0px);
 			scale: 1;
 		}
-
 		50% {
-			transform: translateY(-5px);
+			transform: translateY(0px);
 			scale: 1.1;
 		}
+
 		100% {
 			transform: translateY(0px);
 			scale: 1;
@@ -136,10 +136,10 @@
 		background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3ClinearGradient id=%22b%22 gradientTransform=%22rotate(-45 .5 .5)%22%3E%3Cstop offset=%220%25%22 stop-color=%22%2308AEEA%22%2F%3E%3Cstop offset=%22100%25%22 stop-color=%22%232AF598%22%2F%3E%3C%2FlinearGradient%3E%3CclipPath id=%22a%22%3E%3Cpath fill=%22currentColor%22 d=%22M929 640q-43 140-159.5 235.5t-256.5 55q-140-40.5-262-101t-178.5-195Q16 500 76.5 368T247 147.5q110-88.5 255-95t256.5 86Q870 231 921 365.5t8 274.5Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Cg clip-path=%22url(%23a)%22%3E%3Cpath fill=%22url(%23b)%22 d=%22M929 640q-43 140-159.5 235.5t-256.5 55q-140-40.5-262-101t-178.5-195Q16 500 76.5 368T247 147.5q110-88.5 255-95t256.5 86Q870 231 921 365.5t8 274.5Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
 	}
 	.text-stroke-dark:hover {
-		-webkit-text-stroke: 2px rgb(216, 216, 216);
+		-webkit-text-stroke: 3px rgb(216, 216, 216);
 	}
 	.text-stroke-light:hover {
-		-webkit-text-stroke: 2px black;
+		-webkit-text-stroke: 3px black;
 	}
 	.text-shadow-light {
 		text-shadow: 10px 0px 0px black;
