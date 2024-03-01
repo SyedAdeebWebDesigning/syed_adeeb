@@ -3,17 +3,15 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import Bounded from "./Bounded";
-import Shapes from "../shapes/HeroShapes";
 import { motion } from "framer-motion";
 import { socialMediaLinks } from "@/lib/links";
 import { SocialIcon } from "react-social-icons";
-import Link from "next/link";
+import Shapes from "../shapes/HeroShapes";
 
 type Props = {};
 
 const HeroSection = (props: Props) => {
 	const component = useRef(null);
-
 	useEffect(() => {
 		let ctx = gsap.context(() => {
 			const tl = gsap.timeline();
@@ -66,6 +64,7 @@ const HeroSection = (props: Props) => {
 		if (!name) return;
 		return name.split("").map((letter, index) => (
 			<span
+				ref={component}
 				key={index}
 				className={`name-animation border border-transparent text-stroke-light dark:text-stroke-dark hover:text-transparent name-animation-${key}-index inline-block opacity-0 transition-all duration-200 hover:text-bounce ${
 					key === "last" &&

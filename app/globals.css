@@ -71,7 +71,7 @@
 		@apply border-border;
 	}
 	body {
-		@apply transition-colors duration-300 ease-in-out bg-[#e0e0e0] dark:bg-[#292929];
+		@apply transition-colors duration-300 ease-in-out bg-[#c4c4c4] dark:bg-[#292929];
 	}
 	.link-underline {
 		border-bottom-width: 0;
@@ -92,6 +92,15 @@
 	.link-underline-white {
 		background-image: linear-gradient(transparent, transparent),
 			linear-gradient(#26e5d2, #00fe72, #26e5d2);
+	}
+	.link-active {
+		background-image: linear-gradient(transparent, transparent),
+			linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+	}
+
+	.link-active-white {
+		background-image: linear-gradient(transparent, transparent),
+			linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
 	}
 
 	.link-underline:hover {
