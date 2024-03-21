@@ -7,32 +7,43 @@ type Props = {};
 
 const TimeLine = (props: Props) => {
 	return (
-		<section>
+		<div>
 			<div className="container mx-auto w-full h-full">
 				<div className="relative wrap overflow-hidden p-10 h-full">
 					<motion.div
 						className="border-2-2 absolute border-opacity-90  border-emerald-500 dark:border-emerald-300 border left-[50%]"
 						initial={{ height: 0, opacity: 0 }}
 						animate={{
-							height: "100%",
+							height: "90%",
 							opacity: 1,
 							transition: { type: "spring", stiffness: 10, damping: 10 },
 						}}
-						transition={{ duration: 1 }}
 					/>
 					{timelineData.map((timeline, index) => {
+						const isLeft = index % 2 === 0;
+						const value = isLeft ? 10 : -10;
 						return (
-							<div
+							<motion.div
+								initial={{ x: value, opacity: 0 }}
+								animate={{ x: 0, opacity: 1 }}
+								transition={{
+									delay: index * 0.5,
+									duration: 0.1,
+									type: "spring",
+									stiffness: 70,
+									damping: 6,
+								}}
 								className={`mb-8 flex justify-between items-center ${
 									index % 2 === 0 && "flex-row-reverse"
 								}  w-full right-timeline`}
 								key={timeline.title}>
 								<div className="order-1 w-5/12" />
 								<motion.div
-									initial={{ opacity: 0, scale: 2 }}
+									initial={{ opacity: 0, scale: 1, x: 0 }}
 									animate={{
 										opacity: 1,
 										scale: 1,
+										x: 0,
 									}}
 									transition={{
 										delay: index * 0.1, // Staggering delay for each link
@@ -45,11 +56,11 @@ const TimeLine = (props: Props) => {
 										{index + 1}
 									</h1>
 								</motion.div>
-								<div
+								<motion.div
 									className={`order-1 bg-gradient-to-tr  ${
 										index % 2 === 0
-											? "from-gray-100 to-gray-200 dark:from-gray-700 dark:to-slate-700"
-											: "from-teal-100 to-emerald-200 dark:from-teal-700 dark:to-emerald-700"
+											? "from-slate-300 to-gray-300 transition-all duration-200 ease-in-out dark:from-gray-700 dark:to-slate-700"
+											: "from-teal-300 to-emerald-300 dark:from-teal-700 dark:to-emerald-700"
 									} rounded-lg shadow-xl w-5/12 px-6 py-4`}>
 									<h3 className="my-2 font-bold text-gray-600 text-md dark:text-gray-300">
 										{timeline.date}
@@ -57,16 +68,16 @@ const TimeLine = (props: Props) => {
 									<h3 className="mb-3 font-bold text-gray-800 text-xl dark:text-gray-200">
 										{timeline.title}
 									</h3>
-									<p className="text-sm leading-snug tracking-wide  text-opacity-100 text-gray-900 dark:text-gray-300">
+									<p className="text-sm leading-snug tracking-wide line-clamp-2  text-opacity-100 text-gray-900 dark:text-gray-300">
 										{timeline.content}
 									</p>
-								</div>
-							</div>
+								</motion.div>
+							</motion.div>
 						);
 					})}
 				</div>
 			</div>
-		</section>
+		</div>
 	);
 };
 

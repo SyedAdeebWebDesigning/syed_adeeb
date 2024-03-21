@@ -60,4 +60,5 @@ export const timelineData = [
 		content: "Started learning programming and developed a few small projects.",
 		date: "2017 - 2019",
 	},
+	
 ];

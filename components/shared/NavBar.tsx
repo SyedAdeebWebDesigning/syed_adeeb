@@ -68,7 +68,7 @@ const NavBar = () => {
 										href={link.url}
 										className={`link link-underline link-underline-black dark:link-underline-white font-semibold dark:font-normal transition-all duration-300 ease-in-out  ${
 											pathname === `/${link.title.toLowerCase()}`
-												? "bg-gradient-to-tr link-underline-active dark:link-underline-white-active  dark:from-emerald-300 dark:to-emerald-300 dark:bg-emerald-300 from-emerald-500 to-emerald-500 bg-emerald-500"
+												? "bg-gradient-to-tr link-underline-active dark:link-underline-white-active  dark:from-emerald-300 dark:to-emerald-300 dark:bg-emerald-600 from-emerald-600 to-emerald-500 bg-emerald-500"
 												: ""
 										}`}>
 										{link.title}
