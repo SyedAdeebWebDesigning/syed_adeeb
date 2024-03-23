@@ -60,5 +60,61 @@ export const timelineData = [
 		content: "Started learning programming and developed a few small projects.",
 		date: "2017 - 2019",
 	},
-	
+];
+
+export const projects = [
+	{
+		id: 1,
+		title: "Project 1",
+		description: "Description for Project 1",
+		imageUrl: "https://via.placeholder.com/800",
+	},
+	{
+		id: 2,
+		title: "Project 2",
+		description: "Description for Project 2",
+		imageUrl: "https://via.placeholder.com/300",
+	},
+	{
+		id: 3,
+		title: "Project 3",
+		description: "Description for Project 3",
+		imageUrl: "https://via.placeholder.com/300",
+	},
+	{
+		id: 4,
+		title: "Project 4",
+		description: "Description for Project 4",
+		imageUrl: "https://via.placeholder.com/300",
+	},
+	{
+		id: 5,
+		title: "Project 5",
+		description: "Description for Project 5",
+		imageUrl: "https://via.placeholder.com/300",
+	},
+	{
+		id: 6,
+		title: "Project 6",
+		description: "Description for Project 6",
+		imageUrl: "https://via.placeholder.com/300",
+	},
+	{
+		id: 7,
+		title: "Project 7",
+		description: "Description for Project 7",
+		imageUrl: "https://via.placeholder.com/300",
+	},
+	{
+		id: 8,
+		title: "Project 8",
+		description: "Description for Project 8",
+		imageUrl: "https://via.placeholder.com/800",
+	},
+	{
+		id: 9,
+		title: "Project 9",
+		description: "Description for Project 9",
+		imageUrl: "https://via.placeholder.com/800",
+	},
 ];
