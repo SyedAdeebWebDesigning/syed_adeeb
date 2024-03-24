@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/shared/NavBar";
 import { ThemeProvider } from "@/components/theme-provider";
-
+import { NextUIProvider } from "@nextui-org/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,7 +18,11 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className="" suppressHydrationWarning>
+		<html
+			lang="en"
+			className=""
+			suppressHydrationWarning
+			suppressContentEditableWarning>
 			<body className={`${inter.className}`}>
 				<ThemeProvider attribute="class">
 					<NavBar />

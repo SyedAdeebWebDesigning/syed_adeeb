@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/shapes/HeroShapes.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/shapes/HeroShapes.tsx", "components/progress/GradientCircleProgressbar.js"],
   "exclude": ["node_modules"]
 }
