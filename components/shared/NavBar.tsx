@@ -98,7 +98,7 @@ const NavBar = () => {
 								<ul>
 									{NavLinks.map((link) => (
 										<li key={link.title}>
-											<Link
+											<a
 												href={link.url}
 												className={`link link-underline link-underline-black my-10 flex flex-col ${
 													pathname === `/${link.title.toLowerCase()}`
@@ -106,7 +106,7 @@ const NavBar = () => {
 														: ""
 												}`}>
 												{link.title}
-											</Link>
+											</a>
 										</li>
 									))}
 								</ul>
