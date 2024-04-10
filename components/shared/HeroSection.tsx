@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { socialMediaLinks } from "@/lib/links";
 import { SocialIcon } from "react-social-icons";
 import Shapes from "../shapes/HeroShapes";
+import Spline from "@splinetool/react-spline";
 
 type Props = {};
 
@@ -78,9 +79,17 @@ const HeroSection = (props: Props) => {
 	return (
 		<Bounded className="max-w-[85%] w-full mx-auto" ref={component}>
 			<div className="grid min-h-[70vh] grid-cols-1 lg:grid-cols-2">
-				<div className="hidden lg:block transition-all duration-200 hue-rotate-[10deg] shadow-white">
+				{/* <div className="hidden lg:block transition-all duration-200 hue-rotate-[10deg] shadow-white">
 					<Shapes />
-				</div>
+				</div> */}
+				<motion.div
+					className="relative"
+					initial={{ x: 10, opacity: 0 }}
+					animate={{ x: 0, opacity: 1 }}>
+					<div className="absolute lg:-top-[2%] lg:left-[0%] top-0 left-20 blur-md  md:blur-0 md:hidden lg:inline">
+						<Spline scene="https://prod.spline.design/VYFt-kiHGMBlIHOm/scene.splinecode" />
+					</div>
+				</motion.div>
 				<div className="col-start-1 md:row-start-1 ">
 					<h1 className="md:mt-20 mb-8 text-hero font-extrabold leading-[70px] md:leading-none text-left">
 						<span className="block text-gray-700 dark:text-[#c9c9c9] ">

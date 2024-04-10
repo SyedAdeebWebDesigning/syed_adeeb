@@ -26,7 +26,7 @@ export default function RootLayout({
 			<body className={`${inter.className}`}>
 				<ThemeProvider attribute="class">
 					<NavBar />
-					<>{children}</>
+					<div className="overflow-x-hidden">{children}</div>
 				</ThemeProvider>
 			</body>
 		</html>
