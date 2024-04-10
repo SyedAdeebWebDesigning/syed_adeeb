@@ -86,7 +86,7 @@ const HeroSection = (props: Props) => {
 					className="relative"
 					initial={{ x: 10, opacity: 0 }}
 					animate={{ x: 0, opacity: 1 }}>
-					<div className="absolute lg:-top-[2%] lg:left-[0%] top-0 left-20 blur-md  md:blur-0 md:hidden lg:inline">
+					<div className="absolute lg:-top-[2%] lg:left-[0%] top-0 left-20 hidden blur-[2px] lg:inline">
 						<Spline scene="https://prod.spline.design/VYFt-kiHGMBlIHOm/scene.splinecode" />
 					</div>
 				</motion.div>
