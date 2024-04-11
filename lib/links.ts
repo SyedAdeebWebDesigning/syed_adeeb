@@ -2,22 +2,32 @@ export const NavLinks = [
 	{
 		title: "About",
 		url: "/about",
+		adminOnly: false,
 	},
 	{
 		title: "Timeline",
 		url: "/timeline",
+		adminOnly: false,
 	},
 	{
 		title: "Projects",
 		url: "/projects",
+		adminOnly: false,
 	},
 	{
 		title: "Skills",
 		url: "/skills",
+		adminOnly: false,
 	},
 	{
 		title: "Contact",
 		url: "/contact",
+		adminOnly: false,
+	},
+	{
+		title: "Dashboard",
+		url: "/admin/dashboard",
+		adminOnly: true,
 	},
 ];
 

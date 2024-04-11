@@ -11,6 +11,7 @@ import { usePathname } from "next/navigation";
 
 type Theme = "light" | "dark";
 const NavBar = () => {
+	// TODO: Pass the user admin status to the props
 	const [theme, setThemes] = useState<Theme>("light");
 	// Function to determine the appropriate logo based on the theme
 	const getLogoSource = () => {
@@ -47,7 +48,6 @@ const NavBar = () => {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}>
 						{NavLinks.map((link, i) => {
-							//? logic for finding the current Page
 							return (
 								<motion.li
 									key={link.title}
@@ -63,16 +63,18 @@ const NavBar = () => {
 										stiffness: 150,
 										damping: 10,
 									}}>
-									<Link
-										prefetch
-										href={link.url}
-										className={`link link-underline link-underline-black dark:link-underline-white font-semibold dark:font-normal transition-all duration-300 ease-in-out  ${
-											pathname === `/${link.title.toLowerCase()}`
-												? "bg-gradient-to-tr link-underline-active dark:link-underline-white-active  dark:from-emerald-300 dark:to-emerald-300 dark:bg-emerald-600 from-emerald-600 to-emerald-500 bg-emerald-500"
-												: ""
-										}`}>
-										{link.title}
-									</Link>
+									{link.adminOnly !== true && (
+										<Link
+											prefetch
+											href={link.url}
+											className={`link link-underline link-underline-black dark:link-underline-white font-semibold dark:font-normal transition-all duration-300 ease-in-out  ${
+												pathname === `/${link.title.toLowerCase()}`
+													? "bg-gradient-to-tr link-underline-active dark:link-underline-white-active  dark:from-emerald-300 dark:to-emerald-300 dark:bg-emerald-600 from-emerald-600 to-emerald-500 bg-emerald-500"
+													: ""
+											}`}>
+											{link.title}
+										</Link>
+									)}
 								</motion.li>
 							);
 						})}

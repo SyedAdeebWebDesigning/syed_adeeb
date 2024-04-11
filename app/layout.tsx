@@ -1,9 +1,11 @@
+import React from "react";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/shared/NavBar";
 import { ThemeProvider } from "@/components/theme-provider";
-import { NextUIProvider } from "@nextui-org/react";
+import { ClerkProvider } from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -12,23 +14,24 @@ export const metadata: Metadata = {
 	icons: "/favicon.svg",
 };
 
-export default function RootLayout({
+export default function Layout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
 	return (
-		<html
-			lang="en"
-			className=""
-			suppressHydrationWarning
-			suppressContentEditableWarning>
-			<body className={`${inter.className}`}>
-				<ThemeProvider attribute="class">
-					<NavBar />
-					<div className="overflow-x-hidden">{children}</div>
-				</ThemeProvider>
-			</body>
-		</html>
+		<ClerkProvider>
+			<html
+				lang="en"
+				className=""
+				suppressHydrationWarning
+				suppressContentEditableWarning>
+				<body className={`${inter.className}`}>
+					<ThemeProvider attribute="class">
+						<div className="overflow-x-hidden">{children}</div>
+					</ThemeProvider>
+				</body>
+			</html>
+		</ClerkProvider>
 	);
 }
