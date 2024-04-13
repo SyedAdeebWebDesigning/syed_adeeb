@@ -1,13 +1,15 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
 type Props = {
 	type: string;
 	id: string;
 	name: string;
-	value: string;
-	onChange: (e: any) => void;
-	isRequired: boolean;
+	value?: string;
+	className?: string;
+	onChange?: (e: any) => void;
+	isRequired?: boolean;
 };
 
 const CustomInput = ({
@@ -16,6 +18,7 @@ const CustomInput = ({
 	name,
 	value,
 	onChange,
+	className,
 	isRequired,
 }: Props) => {
 	return (
@@ -27,7 +30,10 @@ const CustomInput = ({
 			value={value}
 			onChange={onChange}
 			placeholder={name.charAt(0).toUpperCase() + name.slice(1)}
-			className="bg-gray-300 dark:bg-[#3b3b3b] border-none dark:placeholder:text-gray-300 placeholder:text-gray-800 text-gray-800 dark:text-white"
+			className={cn(
+				"bg-gray-300 dark:bg-[#3b3b3b] border-none dark:placeholder:text-gray-300 placeholder:text-gray-800 text-gray-800 dark:text-white",
+				className
+			)}
 		/>
 	);
 };

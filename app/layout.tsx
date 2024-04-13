@@ -6,6 +6,7 @@ import "./globals.css";
 import NavBar from "@/components/shared/NavBar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,18 +21,17 @@ export default function Layout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<ClerkProvider>
-			<html
-				lang="en"
-				className=""
-				suppressHydrationWarning
-				suppressContentEditableWarning>
-				<body className={`${inter.className}`}>
-					<ThemeProvider attribute="class">
-						<div className="overflow-x-hidden">{children}</div>
-					</ThemeProvider>
-				</body>
-			</html>
-		</ClerkProvider>
+		<html
+			lang="en"
+			className=""
+			suppressHydrationWarning
+			suppressContentEditableWarning>
+			<body className={`${inter.className}`}>
+				<ThemeProvider attribute="class">
+					<div className="overflow-x-hidden">{children}</div>
+					<Toaster />
+				</ThemeProvider>
+			</body>
+		</html>
 	);
 }

@@ -30,10 +30,10 @@ model SocialIcons {
 
 model User {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  clerkId   String   @unique
+  imgUrl    String   @db.String
   firstName String
   lastName  String
+  password  String
   email     String   @unique
-  imgUrl    String
   isAdmin   Boolean? @default(false)
 }
