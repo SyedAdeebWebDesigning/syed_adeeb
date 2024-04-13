@@ -41,8 +41,9 @@ export const addUser = async ({
 				lastName,
 			},
 		});
-	} catch (error) {
-		console.log("Error creating user");
+	} catch (error: any) {
+		console.log("Error creating user", error.message);
+		throw new Error(error.message);
 	}
 };
 
@@ -114,7 +115,7 @@ export const getUserByEmail = async (email: string): Promise<User | null> => {
 	try {
 		const user = await prismadb.user.findUnique({
 			where: {
-				email,
+				email: email,
 			},
 		});
 		return user;

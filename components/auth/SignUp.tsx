@@ -57,10 +57,10 @@ export const SignUp = () => {
 				});
 				localStorage.setItem("token", token);
 				toast({ description: "User created successfully", variant: "default" });
-				router.push("/admin/dashboard");
+				router.push("/");
 			} catch (error: any) {
 				toast({
-					description: `Max file size 700Kb`,
+					description: `${error.message}`,
 					variant: "destructive",
 				});
 			}

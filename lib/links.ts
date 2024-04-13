@@ -26,7 +26,7 @@ export const NavLinks = [
 	},
 	{
 		title: "Dashboard",
-		url: "/admin/dashboard",
+		url: "/admin",
 		adminOnly: true,
 	},
 ];

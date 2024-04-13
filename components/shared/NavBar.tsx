@@ -1,17 +1,47 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TbMenu } from "react-icons/tb";
 import { NavLinks } from "@/lib/links";
 import { ThemeToggle } from "./ThemeToggle";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { User } from "@prisma/client";
+import { findEmailInToken } from "@/lib/utils";
+import { getUserByEmail } from "@/actions/user.action";
 
 type Theme = "light" | "dark";
 const NavBar = () => {
-	// TODO: Pass the user admin status to the props
+	const [user, setUser] = useState<User | null>(null);
+
+	useEffect(() => {
+		const token: any = localStorage.getItem("token");
+		if (!token) {
+			window.location.href = "/sign-in";
+			return;
+		}
+
+		const email: any = findEmailInToken(token);
+		if (!email) {
+			window.location.href = "/auth/sign-in";
+			return;
+		}
+
+		const fetchUser = async () => {
+			try {
+				const userData = await getUserByEmail(email);
+				setUser(userData);
+			} catch (error) {
+				console.error("Error fetching user:", error);
+				// Handle error as needed, e.g., redirect to sign-in page
+				window.location.href = "/auth/sign-in";
+			}
+		};
+
+		fetchUser();
+	}, []);
 	const [theme, setThemes] = useState<Theme>("light");
 	// Function to determine the appropriate logo based on the theme
 	const getLogoSource = () => {
@@ -63,7 +93,7 @@ const NavBar = () => {
 										stiffness: 150,
 										damping: 10,
 									}}>
-									{link.adminOnly !== true && (
+									{user?.isAdmin || !link.adminOnly ? (
 										<Link
 											prefetch
 											href={link.url}
@@ -74,7 +104,7 @@ const NavBar = () => {
 											}`}>
 											{link.title}
 										</Link>
-									)}
+									) : null}
 								</motion.li>
 							);
 						})}

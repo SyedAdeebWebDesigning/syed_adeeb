@@ -16,6 +16,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { toast } from "../ui/use-toast";
 
 export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 	const pathname = usePathname();
@@ -85,6 +86,16 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 
 		fetchUser();
 	}, []);
+
+	if (user?.isAdmin === false) {
+		toast({
+			description: "You are not allowed to access this page",
+			variant: "destructive",
+		});
+		setTimeout(() => {
+			window.location.href = "/";
+		}, 2000);
+	}
 
 	return (
 		<div
