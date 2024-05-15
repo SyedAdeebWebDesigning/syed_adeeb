@@ -8,10 +8,14 @@ import { socialMediaLinks } from "@/lib/links";
 import { SocialIcon } from "react-social-icons";
 import Shapes from "../shapes/HeroShapes";
 import Spline from "@splinetool/react-spline";
+import { HomePageData, SocialIcons } from "@prisma/client";
 
-type Props = {};
+type Props = {
+	socialIcons: SocialIcons[];
+	homePageData: HomePageData | any;
+};
 
-const HeroSection = (props: Props) => {
+const HeroSection = ({ socialIcons, homePageData }: Props) => {
 	const component = useRef(null);
 	useEffect(() => {
 		let ctx = gsap.context(() => {
@@ -57,9 +61,9 @@ const HeroSection = (props: Props) => {
 		return () => ctx.revert();
 	}, []);
 
-	const firstName: string = "Syed";
-	const lastName: string = "Adeeb";
-	const tagLine: string = "FULL-STACK DEVELOPER.";
+	const firstName: string = homePageData.firstName;
+	const lastName: string = homePageData.lastName;
+	const tagLine: string = homePageData.tagline;
 
 	const renderLetters = (name: string, key: string) => {
 		if (!name) return;
@@ -103,11 +107,11 @@ const HeroSection = (props: Props) => {
 						{tagLine}
 					</span>
 					<ul className="flex space-x-4 items-center w-full mt-3 justify-start">
-						{socialMediaLinks.map((link, index) => (
+						{socialIcons.map((link: SocialIcons, index: number) => (
 							<motion.li
 								key={index}
 								initial={{ x: -100, opacity: 0 }}
-								aria-label={link.name}
+								aria-label={link.url}
 								animate={{
 									x: 0,
 									opacity: 1,
@@ -122,7 +126,7 @@ const HeroSection = (props: Props) => {
 								}}>
 								<h3 className="hover:scale-110 transition-all duration-300 ease-in-out">
 									<SocialIcon
-										url={link.link}
+										url={link.url}
 										className=""
 										bgColor="#303030"
 										target="_"

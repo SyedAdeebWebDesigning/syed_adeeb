@@ -18,11 +18,6 @@ const NavBar = () => {
 
 	useEffect(() => {
 		const token: any = localStorage.getItem("token");
-		if (!token) {
-			window.location.href = "/sign-in";
-			return;
-		}
-
 		const email: any = findEmailInToken(token);
 		if (!email) {
 			window.location.href = "/auth/sign-in";
