@@ -26,7 +26,7 @@ export const SignIn = () => {
 			await signIn({ email: email, password: password });
 			toast({ description: "User logged in", variant: "default" });
 			localStorage.setItem("token", token);
-			router.push("/admin");
+			router.push("/");
 		} catch (err: any) {
 			toast({ description: err.message, variant: "destructive" });
 		}
@@ -36,7 +36,7 @@ export const SignIn = () => {
 		const token = localStorage.getItem("token");
 
 		if (token) {
-			window.location.href = "/admin";
+			window.location.href = "/";
 		}
 	}, []);
 
