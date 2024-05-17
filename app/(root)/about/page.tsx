@@ -6,14 +6,23 @@ import Heading from "@/components/shared/heading";
 import { AboutPageData } from "@prisma/client";
 
 const AboutPage = async () => {
-	const aboutPageData: AboutPageData | any = await getAboutPageData();
-	const firstName = aboutPageData?.name.slice(
-		0,
-		aboutPageData?.name.indexOf(" ")
-	);
-	const lastName = aboutPageData?.name.slice(aboutPageData?.name.indexOf(" "));
-	const message = aboutPageData?.message;
-	const imgUrl = aboutPageData?.imgUrl;
+	let aboutPageData: AboutPageData | null | any = null;
+
+	try {
+		aboutPageData = await getAboutPageData();
+	} catch (error) {
+		console.error("Error fetching AboutPage data:", error);
+	}
+
+	const firstName = aboutPageData?.name
+		? aboutPageData.name.slice(0, aboutPageData.name.indexOf(" "))
+		: "First Name";
+	const lastName = aboutPageData?.name
+		? aboutPageData.name.slice(aboutPageData.name.indexOf(" "))
+		: "Last Name";
+	const message = aboutPageData?.message || "Default message";
+	const imgUrl = aboutPageData?.imgUrl || "/default-image.png";
+
 	return (
 		<main>
 			<Bounded>
@@ -26,7 +35,7 @@ const AboutPage = async () => {
 							message={message}
 						/>
 					</div>
-					<div className="mx-auto ">
+					<div className="mx-auto">
 						<AboutImage imgUrl={imgUrl} />
 					</div>
 				</section>
