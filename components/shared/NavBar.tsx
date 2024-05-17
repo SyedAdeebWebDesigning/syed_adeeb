@@ -19,10 +19,6 @@ const NavBar = () => {
 	useEffect(() => {
 		const token: any = localStorage.getItem("token");
 		const email: any = findEmailInToken(token);
-		if (!email) {
-			window.location.href = "/sign-in";
-			return;
-		}
 
 		const fetchUser = async () => {
 			try {
@@ -31,7 +27,6 @@ const NavBar = () => {
 			} catch (error) {
 				console.error("Error fetching user:", error);
 				// Handle error as needed, e.g., redirect to sign-in page
-				window.location.href = "/sign-in";
 			}
 		};
 
