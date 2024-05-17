@@ -75,8 +75,7 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 
 		const email: any = findEmailInToken(token);
 		if (!email) {
-			window.location.href = "/auth/sign-in";
-			return;
+			toast({ description: "User not signed in", variant: "default" });
 		}
 
 		const fetchUser = async () => {
