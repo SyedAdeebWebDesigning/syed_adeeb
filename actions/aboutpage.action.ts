@@ -1,6 +1,6 @@
 "use server";
 
-import { prismadb } from "@/lib/prisma";
+import prismadb from "@/lib/prisma";
 
 /**
  * Fetches the existing about page data.

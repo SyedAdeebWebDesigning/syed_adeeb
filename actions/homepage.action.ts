@@ -1,6 +1,6 @@
 "use server";
 
-import { prismadb } from "@/lib/prisma";
+import prismadb from "@/lib/prisma";
 
 // Fetch the existing home page data
 export const getHomePageData = async () => {

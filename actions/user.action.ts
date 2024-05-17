@@ -1,7 +1,7 @@
 "use server";
 
 import { toast } from "@/components/ui/use-toast";
-import { prismadb } from "@/lib/prisma";
+import prismadb from "@/lib/prisma";
 import { User } from "@prisma/client";
 import crypto from "crypto";
 

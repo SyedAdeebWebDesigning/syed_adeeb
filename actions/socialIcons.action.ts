@@ -1,6 +1,6 @@
 "use server";
 
-import { prismadb } from "@/lib/prisma";
+import prismadb from "@/lib/prisma";
 
 export const getSocialIcons = async () => {
 	const socialIcons = await prismadb.socialIcons.findMany();
