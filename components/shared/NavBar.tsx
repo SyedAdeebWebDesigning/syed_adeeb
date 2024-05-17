@@ -20,7 +20,7 @@ const NavBar = () => {
 		const token: any = localStorage.getItem("token");
 		const email: any = findEmailInToken(token);
 		if (!email) {
-			window.location.href = "/auth/sign-in";
+			window.location.href = "/sign-in";
 			return;
 		}
 
@@ -31,7 +31,7 @@ const NavBar = () => {
 			} catch (error) {
 				console.error("Error fetching user:", error);
 				// Handle error as needed, e.g., redirect to sign-in page
-				window.location.href = "/auth/sign-in";
+				window.location.href = "/sign-in";
 			}
 		};
 

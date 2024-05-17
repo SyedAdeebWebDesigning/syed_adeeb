@@ -85,7 +85,7 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 			} catch (error) {
 				console.error("Error fetching user:", error);
 				// Handle error as needed, e.g., redirect to sign-in page
-				window.location.href = "/auth/sign-in";
+				window.location.href = "/sign-in";
 			}
 		};
 
