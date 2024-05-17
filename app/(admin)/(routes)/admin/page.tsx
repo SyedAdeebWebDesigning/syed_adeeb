@@ -11,6 +11,10 @@ const AdminPage = () => {
 			label: "Homepage",
 		},
 		{
+			href: "/admin/about-data",
+			label: "About",
+		},
+		{
 			href: "/admin/timeline-data",
 			label: "Timeline",
 		},

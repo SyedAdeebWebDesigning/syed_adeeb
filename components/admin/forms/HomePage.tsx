@@ -8,8 +8,12 @@ import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import { SocialIcon } from "react-social-icons";
 import { toast } from "@/components/ui/use-toast";
-import { createSocialIcon } from "@/actions/socialIcons.action";
+import {
+	createSocialIcon,
+	deleteSocialIcon,
+} from "@/actions/socialIcons.action";
 import { HomePageData, SocialIcons } from "@prisma/client";
+import { RxCross2 } from "react-icons/rx";
 
 type HomePageProps = {
 	socialIcons: SocialIcons[];
@@ -111,7 +115,7 @@ const HomePage: React.FC<HomePageProps> = ({ socialIcons, homePageData }) => {
 					{homePageData ? "Update Data" : "Create Data"}
 				</Button>
 
-				<div className="flex w-full space-x-2">
+				<div className="flex flex-col md:flex-row w-full space-y-2 md:space-y-0  md:space-x-2">
 					<CustomInput
 						type="text"
 						id="socialLink"
@@ -127,10 +131,21 @@ const HomePage: React.FC<HomePageProps> = ({ socialIcons, homePageData }) => {
 					</Button>
 				</div>
 
-				<div className="mt-4 flex space-x-2 flex-wrap">
+				<div className="mt-4 grid md:grid-cols-3 sm:grid-cols-3 grid-cols-2 gap-1 xl:grid-cols-8">
 					{socialIcons?.map((icons) => (
-						<div key={icons.id}>
-							<SocialIcon url={icons.url} />
+						<div key={icons.id} className="relative group">
+							<SocialIcon url={icons.url} target="_" />
+							<div
+								className="absolute top-0 right-5 invisible group-hover:visible cursor-pointer transition-all duration-200 ease-in-out"
+								onClick={() => {
+									deleteSocialIcon(icons.id);
+									toast({
+										description: "Social Link deleted successfully",
+										variant: "default",
+									});
+								}}>
+								<RxCross2 size={25} className="rounded-full p-1 bg-red-500" />
+							</div>
 						</div>
 					))}
 				</div>

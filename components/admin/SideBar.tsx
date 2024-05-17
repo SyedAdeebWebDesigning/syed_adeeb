@@ -10,6 +10,7 @@ import {
 	Folder,
 	Package2,
 	MessageSquare,
+	Info,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,6 +31,11 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 			href: "/admin/home-page-data",
 			label: "Homepage",
 			icon: Home,
+		},
+		{
+			href: "/admin/about-data",
+			label: "About",
+			icon: Info,
 		},
 		{
 			href: "/admin/timeline-data",

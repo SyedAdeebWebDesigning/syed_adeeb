@@ -3,9 +3,13 @@ import React from "react";
 import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
 import { motion } from "framer-motion";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
-type Props = {};
+type Props = {
+	firstName: string;
+	lastName: string;
+	message: string;
+};
 
-const AboutHeading = (props: Props) => {
+const AboutHeading = ({ firstName, lastName, message }: Props) => {
 	const words = [
 		{
 			text: "Hello",
@@ -17,17 +21,16 @@ const AboutHeading = (props: Props) => {
 			text: "am",
 		},
 		{
-			text: "Syed",
+			text: firstName,
 			className: "text-emerald-700 dark:text-emerald-500",
 		},
 		{
-			text: "Adeeb.",
+			text: `${lastName}.`,
 			className: "text-emerald-700 dark:text-emerald-500",
 		},
 	];
 
-	const about = `
-I am Syed Adeeb, a seasoned full-stack developer specializing in web development since 2020. My focus is on crafting sophisticated and user-centric websites by leveraging my expertise in both front-end and back-end technologies. I am committed to staying updated with the latest advancements in the field to deliver innovative solutions that exceed client expectations.`;
+	const about = message;
 	return (
 		<div className="text-center lg:text-left">
 			<motion.div

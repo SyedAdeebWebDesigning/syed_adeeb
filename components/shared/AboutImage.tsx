@@ -5,7 +5,7 @@ import React from "react";
 import { CardBody, CardContainer, CardItem } from "../ui/3d-card";
 import { easeIn, motion } from "framer-motion";
 
-export default function AboutImage() {
+export default function AboutImage({ imgUrl }: { imgUrl: string }) {
 	return (
 		<CardContainer className="inter-var py-1">
 			<CardBody className="relative group/card w-auto sm:w-[30rem] h-auto rounded-xl p-6">
@@ -23,7 +23,7 @@ export default function AboutImage() {
 							},
 						}}>
 						<Image
-							src="/about1.png"
+							src={`${imgUrl}`}
 							height="700"
 							width="700"
 							className="h-full w-full object-cover rounded-tl-[20%] rounded-tr-[4%] rounded-bl-[4%] rounded-br-[20%] group-hover/card:shadow-xl bg-[#d7d7d7] dark:bg-[#1f1f1f] "
