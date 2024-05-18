@@ -61,9 +61,9 @@ const HeroSection = ({ socialIcons, homePageData }: Props) => {
 		return () => ctx.revert();
 	}, []);
 
-	const firstName: string = homePageData.firstName;
-	const lastName: string = homePageData.lastName;
-	const tagLine: string = homePageData.tagline;
+	const firstName: string = homePageData?.firstName || "Syed";
+	const lastName: string = homePageData?.lastName || "Adeeb";
+	const tagLine: string = homePageData?.tagline || "Fullstack Developer";
 
 	const renderLetters = (name: string, key: string) => {
 		if (!name) return;
@@ -83,9 +83,6 @@ const HeroSection = ({ socialIcons, homePageData }: Props) => {
 	return (
 		<Bounded className="max-w-[85%] w-full mx-auto" ref={component}>
 			<div className="grid min-h-[70vh] grid-cols-1 lg:grid-cols-2">
-				{/* <div className="hidden lg:block transition-all duration-200 hue-rotate-[10deg] shadow-white">
-					<Shapes />
-				</div> */}
 				<motion.div
 					className="relative"
 					initial={{ x: 10, opacity: 0 }}
