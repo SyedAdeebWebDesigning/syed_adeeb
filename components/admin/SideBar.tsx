@@ -11,13 +11,15 @@ import {
 	Package2,
 	MessageSquare,
 	Info,
+	LogOut,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "../ui/use-toast";
+import { Button } from "../ui/button";
 
 export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 	const pathname = usePathname();
@@ -69,7 +71,7 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 	useEffect(() => {
 		const token: any = localStorage.getItem("token");
 		if (!token) {
-			window.location.href = "/sign-in";
+			window.location.href = "/";
 			return;
 		}
 
@@ -84,8 +86,8 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 				setUser(userData);
 			} catch (error) {
 				console.error("Error fetching user:", error);
-				// Handle error as needed, e.g., redirect to sign-in page
-				window.location.href = "/sign-in";
+				// Handle error as needed, e.g., redirect to root page
+				window.location.href = "/";
 			}
 		};
 
@@ -102,15 +104,21 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 		}, 2000);
 	}
 
+	const handleLogout = () => {
+		localStorage.removeItem("token");
+		toast({ description: "Logged out successfully", variant: "default" });
+		window.location.href = "/";
+	};
+
 	return (
 		<div
 			className={cn(
 				"col-span-1  h-screen",
 				isMobile === true ? "" : "bg-[#282828] border-r-2 border-white/10"
 			)}>
-			<div className="space-y-4 flex h-full text-primary">
-				<div className="p-3 flex-1 justify-start flex">
-					<div className="space-y-2 w-full">
+			<div className="flex flex-col h-full text-primary justify-between">
+				<div className="space-y-4 p-3 flex-1">
+					<div className="space-y-2 w-full items-center">
 						<Link href={"/"} className="flex justify-center mb-10">
 							<Image
 								src={"/logoWhite.png"} // Dynamically set the source based on the theme
@@ -154,6 +162,15 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 							</Link>
 						))}
 					</div>
+				</div>
+				<div className="p-3 my-5">
+					<Button
+						variant={"destructive"}
+						onClick={handleLogout}
+						className="flex p-3 w-full justify-start font-medium mt-5 cursor-pointer rounded-lg transition">
+						<LogOut className="size-6 mr-2 " />
+						<p className="text-md flex flex-col text-gray-50">Logout</p>
+					</Button>
 				</div>
 			</div>
 		</div>
