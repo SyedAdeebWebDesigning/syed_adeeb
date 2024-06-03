@@ -1,18 +1,27 @@
+"use client";
 import { getAboutPageData } from "@/actions/aboutpage.action";
 import AboutHeading from "@/components/shared/AboutHeading";
 import AboutImage from "@/components/shared/AboutImage";
 import Bounded from "@/components/shared/Bounded";
 import Heading from "@/components/shared/heading";
 import { AboutPageData } from "@prisma/client";
+import { useEffect, useState } from "react";
 
-const AboutPage = async () => {
-	let aboutPageData: AboutPageData | null | any = null;
+const AboutPage = () => {
+	const [aboutPageData, setAboutPageData] = useState<any>(null);
 
-	try {
-		aboutPageData = await getAboutPageData();
-	} catch (error) {
-		console.error("Error fetching AboutPage data:", error);
-	}
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const result = await getAboutPageData();
+				setAboutPageData(result);
+			} catch (error) {
+				console.error("Error fetching home page data:", error);
+			}
+		};
+
+		fetchData();
+	}, []);
 
 	const firstName = aboutPageData?.name
 		? aboutPageData.name.slice(0, aboutPageData.name.indexOf(" "))
