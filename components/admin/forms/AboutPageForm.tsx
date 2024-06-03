@@ -10,15 +10,11 @@ import { toast } from "../../ui/use-toast";
 import { Textarea } from "@nextui-org/react";
 import {
 	createAboutPageData,
+	getAboutPageData,
 	updateAboutPageData,
 } from "@/actions/aboutpage.action";
-import { AboutPageData } from "@prisma/client";
 
-export const AboutPageForm = ({
-	aboutPageData,
-}: {
-	aboutPageData: AboutPageData;
-}) => {
+export const AboutPageForm = () => {
 	const router = useRouter();
 	const [name, setName] = useState("");
 	const [message, setMessage] = useState("");
@@ -43,6 +39,21 @@ export const AboutPageForm = ({
 	};
 
 	const disabled: boolean = !name || !message || !selectedFile || !imageUrl;
+
+	const [aboutPageData, setAboutPageData] = useState<any>(null);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const result = await getAboutPageData();
+				setAboutPageData(result);
+			} catch (error) {
+				console.error("Error fetching home page data:", error);
+			}
+		};
+
+		fetchData();
+	}, []);
 
 	useEffect(() => {
 		if (aboutPageData) {
