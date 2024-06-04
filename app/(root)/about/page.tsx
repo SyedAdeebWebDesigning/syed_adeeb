@@ -29,7 +29,9 @@ const AboutPage = () => {
 	const lastName = aboutPageData?.name
 		? aboutPageData.name.slice(aboutPageData.name.indexOf(" "))
 		: "Adeeb";
-	const message = aboutPageData?.message || "";
+	const message: string | any = aboutPageData?.message
+		? aboutPageData.message
+		: "I am Syed Adeeb, a seasoned full-stack developer specializing in web development since 2020. My focus is on crafting sophisticated and user-centric websites by leveraging my expertise in both front-end and back-end technologies. I am committed to staying updated with the latest advancements in the field to deliver innovative solutions that exceed client expectations.";
 	const imgUrl = aboutPageData?.imgUrl || "/about-data.webp";
 
 	return (
