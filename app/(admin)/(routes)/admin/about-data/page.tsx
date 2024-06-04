@@ -1,6 +1,5 @@
-import { getAboutPageData } from "@/actions/aboutpage.action";
 import { AdminHeading } from "@/components/admin/AdminHeading";
-import { AboutPageForm } from "@/components/admin/forms/AboutPageForm";
+import AboutPageForm from "@/components/admin/forms/AboutPageForm";
 
 import React from "react";
 

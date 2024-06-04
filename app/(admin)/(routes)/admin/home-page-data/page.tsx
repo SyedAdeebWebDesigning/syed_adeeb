@@ -9,7 +9,7 @@ const HomePageData = async () => {
 	return (
 		<main>
 			<AdminHeading>HomePage Data</AdminHeading>
-			<HomePage socialIcons={socialIcons} homePageData={homePageData} />
+			<HomePage />
 		</main>
 	);
 };

@@ -1,46 +1,56 @@
 "use client";
-import CustomInput from "../../shared/input";
-import { motion } from "framer-motion";
-import { Button } from "../../ui/button";
 import { useEffect, useState } from "react";
-import { Input } from "../../ui/input";
-import { Label } from "../../ui/label";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 import { toast } from "../../ui/use-toast";
 import { Textarea } from "@nextui-org/react";
+import { Button } from "../../ui/button";
+import { Input } from "../../ui/input";
+import { Label } from "../../ui/label";
+import CustomInput from "../../shared/input";
 import {
 	createAboutPageData,
 	getAboutPageData,
 	updateAboutPageData,
 } from "@/actions/aboutpage.action";
 
-export const AboutPageForm = () => {
+/**
+ * Component for managing the About Page form.
+ * @returns {JSX.Element} The AboutPageForm component.
+ */
+const AboutPageForm: React.FC = (): JSX.Element => {
 	const router = useRouter();
-	const [name, setName] = useState("");
-	const [message, setMessage] = useState("");
-	const [selectedFile, setSelectedFile] = useState<any>(null);
+	const [name, setName] = useState<string>("");
+	const [message, setMessage] = useState<string>("");
+	const [selectedFile, setSelectedFile] = useState<File | null>(null);
 	const [imageUrl, setImageUrl] = useState<string | null>(null);
+	const [aboutPageData, setAboutPageData] = useState<any>(null);
 
-	// Function to handle file input change
-	const handleFileChange = (event: any) => {
-		const file = event.target.files[0];
-
-		setSelectedFile(file);
-		generateImageUrl(file);
+	/**
+	 * Handles file input change and generates the image URL.
+	 * @param {React.ChangeEvent<HTMLInputElement>} event - The file input change event.
+	 */
+	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const file = event.target.files?.[0];
+		if (file) {
+			setSelectedFile(file);
+			generateImageUrl(file);
+		}
 	};
 
-	// Function to generate URL for the selected file
-	const generateImageUrl = (file: any) => {
-		const reader: any = new FileReader();
-		reader.onload = () => {
-			setImageUrl(reader.result);
-		};
+	/**
+	 * Generates a URL for the selected file.
+	 * @param {File} file - The selected file.
+	 */
+	const generateImageUrl = (file: File) => {
+		const reader = new FileReader();
+		reader.onload = () => setImageUrl(reader.result as string);
 		reader.readAsDataURL(file);
 	};
 
-	const disabled: boolean = !name || !message || !selectedFile || !imageUrl;
-
-	const [aboutPageData, setAboutPageData] = useState<any>(null);
+	// Adjusted logic for the disabled state of the submit button
+	const isDisabled =
+		!name || !message || (!selectedFile && !imageUrl && !aboutPageData);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -48,10 +58,9 @@ export const AboutPageForm = () => {
 				const result = await getAboutPageData();
 				setAboutPageData(result);
 			} catch (error) {
-				console.error("Error fetching home page data:", error);
+				console.error("Error fetching about page data:", error);
 			}
 		};
-
 		fetchData();
 	}, []);
 
@@ -63,27 +72,27 @@ export const AboutPageForm = () => {
 		}
 	}, [aboutPageData]);
 
-	const handleSubmit = async (e: any) => {
+	/**
+	 * Handles form submission for creating or updating about page data.
+	 * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
+	 */
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
 		try {
 			const data = {
 				name,
 				message,
-				imgUrl: imageUrl || "", // Set a default value of an empty string if imageUrl is null
+				imgUrl: imageUrl || aboutPageData.imgUrl || "",
 			};
 
 			if (aboutPageData) {
-				// Update the existing data
 				await updateAboutPageData(aboutPageData.id, data);
 				toast({ description: "Data updated successfully", variant: "default" });
-				router.refresh();
 			} else {
-				// Create new data
 				await createAboutPageData(data);
 				toast({ description: "Data created successfully", variant: "default" });
-				router.refresh();
 			}
+			router.refresh();
 		} catch (error: any) {
 			toast({ description: error.message, variant: "destructive" });
 		}
@@ -91,9 +100,9 @@ export const AboutPageForm = () => {
 
 	return (
 		<section className="">
-			<div className="px-5 py-24 ">
+			<div className="px-5 py-24">
 				<div className="lg:w-2/4 md:w-2/3 mx-auto rounded-md p-10 relative">
-					<form className="flex flex-wrap -m-2 ">
+					<form className="flex flex-wrap -m-2" onSubmit={handleSubmit}>
 						<div className="p-2 w-full">
 							<motion.div
 								className="relative"
@@ -125,7 +134,6 @@ export const AboutPageForm = () => {
 								</Label>
 								<Input
 									maxLength={700}
-									required
 									type="file"
 									onChange={handleFileChange}
 									accept="image/*"
@@ -188,22 +196,9 @@ export const AboutPageForm = () => {
 								type: "spring",
 								delay: 1,
 							}}>
-							{aboutPageData ? (
-								<>
-									<Button className="w-full" onClick={handleSubmit}>
-										Update data
-									</Button>
-								</>
-							) : (
-								<>
-									<Button
-										className="w-full"
-										onClick={handleSubmit}
-										disabled={disabled}>
-										Create data
-									</Button>
-								</>
-							)}
+							<Button className="w-full" type="submit" disabled={isDisabled}>
+								{aboutPageData ? "Update Data" : "Create Data"}
+							</Button>
 						</motion.div>
 					</form>
 				</div>
@@ -211,3 +206,5 @@ export const AboutPageForm = () => {
 		</section>
 	);
 };
+
+export default AboutPageForm;

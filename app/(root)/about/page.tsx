@@ -8,12 +8,12 @@ import { AboutPageData } from "@prisma/client";
 import { useEffect, useState } from "react";
 
 const AboutPage = () => {
-	const [aboutPageData, setAboutPageData] = useState<any>(null);
+	const [aboutPageData, setAboutPageData] = useState<AboutPageData>();
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const result = await getAboutPageData();
+				const result: any = await getAboutPageData();
 				setAboutPageData(result);
 			} catch (error) {
 				console.error("Error fetching home page data:", error);
@@ -25,10 +25,10 @@ const AboutPage = () => {
 
 	const firstName = aboutPageData?.name
 		? aboutPageData.name.slice(0, aboutPageData.name.indexOf(" "))
-		: "First Name";
+		: "Syed";
 	const lastName = aboutPageData?.name
 		? aboutPageData.name.slice(aboutPageData.name.indexOf(" "))
-		: "Last Name";
+		: "Adeeb";
 	const message = aboutPageData?.message || "Default message";
 	const imgUrl = aboutPageData?.imgUrl || "/default-image.png";
 
