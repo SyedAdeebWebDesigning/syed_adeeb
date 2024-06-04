@@ -29,8 +29,8 @@ const AboutPage = () => {
 	const lastName = aboutPageData?.name
 		? aboutPageData.name.slice(aboutPageData.name.indexOf(" "))
 		: "Adeeb";
-	const message = aboutPageData?.message || "Default message";
-	const imgUrl = aboutPageData?.imgUrl || "/default-image.png";
+	const message = aboutPageData?.message || "";
+	const imgUrl = aboutPageData?.imgUrl || "/about-data.webp";
 
 	return (
 		<main>
