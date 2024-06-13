@@ -2,10 +2,13 @@
 import React from "react";
 import { timelineData } from "@/lib/links";
 import { motion } from "framer-motion";
+import { Timeline } from "@prisma/client";
 
-type Props = {};
+type Props = {
+	timelineData: Timeline | any;
+};
 
-const TimeLine = (props: Props) => {
+const TimeLine = ({ timelineData }: Props) => {
 	return (
 		<div>
 			<div className="container mx-auto w-full h-full">
@@ -16,10 +19,14 @@ const TimeLine = (props: Props) => {
 						animate={{
 							height: "90%",
 							opacity: 1,
-							transition: { type: "spring", stiffness: 10, damping: 10 },
+							transition: {
+								type: "spring",
+								stiffness: 10,
+								damping: 10,
+							},
 						}}
 					/>
-					{timelineData.map((timeline, index) => {
+					{timelineData.map((timeline: Timeline, index: number) => {
 						const isLeft = index % 2 === 0;
 						const value = isLeft ? 10 : -10;
 						return (
@@ -69,7 +76,7 @@ const TimeLine = (props: Props) => {
 										{timeline.title}
 									</h3>
 									<p className="text-sm leading-snug tracking-wide line-clamp-2  text-opacity-100 text-gray-900 dark:text-gray-300">
-										{timeline.content}
+										{timeline.description}
 									</p>
 								</motion.div>
 							</motion.div>

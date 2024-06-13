@@ -8,7 +8,13 @@ import {
 } from "@/components/ui/carousel";
 import { timelineData } from "@/lib/links";
 import { motion } from "framer-motion";
-export function HorizontalTimeLine() {
+import { Timeline } from "@prisma/client";
+
+interface Props {
+	timelineData: Timeline | any;
+}
+
+export function HorizontalTimeLine({ timelineData }: Props) {
 	const delay = 4000;
 	const plugin = React.useRef(
 		Autoplay({ delay: delay, stopOnInteraction: false })
@@ -20,7 +26,7 @@ export function HorizontalTimeLine() {
 			className="w-full max-w-xs my-3 grid place-content-center h-full "
 			plugins={[plugin.current]}>
 			<CarouselContent>
-				{timelineData.map((timeline, parentIndex) => {
+				{timelineData.map((timeline: Timeline, parentIndex: number) => {
 					return (
 						<CarouselItem key={parentIndex} className="space-y-10 ">
 							<div className="p-1 space-y-4">
@@ -41,11 +47,11 @@ export function HorizontalTimeLine() {
 									whileInView={{ y: 0, opacity: 1 }}
 									transition={{ duration: 0.5 }}
 									className="line-clamp-2">
-									{timeline.content}
+									{timeline.description}
 								</motion.p>
 							</div>
 							<div className="flex justify-center items-center bottom-20 w-full">
-								{timelineData.map((_, index) => (
+								{timelineData.map((_: Timeline, index: number) => (
 									<div
 										key={index}
 										className={`flex items-center justify-center cursor-pointer ${
