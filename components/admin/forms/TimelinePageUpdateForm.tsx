@@ -1,50 +1,80 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { addTimelineItem } from "@/actions/timeline.action";
+import {
+	addTimelineItem,
+	getTimelineItem,
+	updateTimelineItem,
+} from "@/actions/timeline.action";
 import CustomInput from "@/components/shared/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
+import { Timeline } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
-import React, { useState } from "react";
+type Props = {
+	id: string;
+};
 
-type Props = {};
-
-const TimelinePageForm = (props: Props) => {
-	const [date, setDate] = useState("");
-	const [title, setTitle] = useState("");
-	const [description, setDescription] = useState("");
+const TimelinePageUpdateForm: React.FC<Props> = ({ id }: Props) => {
+	const [timelineData, setTimelineData] = useState<Timeline | null>(null);
+	const [date, setDate] = useState<string>("");
+	const [title, setTitle] = useState<string>("");
+	const [description, setDescription] = useState<string>("");
 	const router = useRouter();
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const data: Timeline | any = await getTimelineItem(id);
+				if (data) {
+					setTimelineData(data);
+					setDate(data.date || "");
+					setTitle(data.title || "");
+					setDescription(data.description || "");
+				}
+			} catch (error) {
+				toast({
+					description: "Error fetching timeline data",
+					variant: "destructive",
+				});
+			}
+		};
+		fetchData();
+	}, [id]); // Add `id` to dependency array to fetch data when `id` changes
+
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
-			const data = {
+			const newData = {
 				date,
 				title,
 				description,
 			};
-			await addTimelineItem(data);
-			setDate("");
-			setTitle("");
-			setDescription("");
+			await updateTimelineItem(id, newData);
 			toast({
-				description: "Timeline data created successfully",
+				description: "Timeline data updated successfully",
 				variant: "default",
 			});
+			router.push("/admin/timeline-data");
 		} catch (error) {
 			toast({
-				description: "Error creating timeline data",
+				description: "Error updating timeline data",
 				variant: "destructive",
 			});
-		} finally {
-			router.push("/admin/timeline-data");
 		}
 	};
+
+	if (!timelineData) {
+		return <p>Loading...</p>; // Handle loading state while fetching data
+	}
+
 	return (
 		<section className="">
 			<div className="sm:px-5 py-24">
-				<div className="lg:w-2/4 w-1/1 md:w-2/3 mx-auto rounded-md sm:p-10 relative">
+				<div className="lg:w-2/4 w-full md:w-2/3 mx-auto rounded-md sm:p-10 relative">
 					<form onSubmit={handleSubmit}>
 						<div className="flex flex-col sm:flex-row space-y-2 sm:space-x-2 sm:space-y-0">
 							<CustomInput
@@ -57,7 +87,7 @@ const TimelinePageForm = (props: Props) => {
 							/>
 							<CustomInput
 								type="text"
-								name="Enter title (Full Stack Developer)"
+								name="Enter Title (Full Stack Developer)"
 								id="title"
 								value={title}
 								onChange={(e) => setTitle(e.target.value)}
@@ -76,7 +106,7 @@ const TimelinePageForm = (props: Props) => {
 							required
 						/>
 						<Button className="w-full" type="submit">
-							Create Timeline Data
+							Update Timeline Data {title}
 						</Button>
 					</form>
 				</div>
@@ -85,4 +115,4 @@ const TimelinePageForm = (props: Props) => {
 	);
 };
 
-export default TimelinePageForm;
+export default TimelinePageUpdateForm;

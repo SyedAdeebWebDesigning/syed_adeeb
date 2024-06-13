@@ -4,6 +4,7 @@ import { getTimelineData } from "@/actions/timeline.action";
 import { AdminHeading } from "@/components/admin/AdminHeading";
 import HandleNoData from "@/components/admin/handleNoData";
 import TimelineDataList from "@/components/admin/list/timelineDataList";
+import { Button } from "@/components/ui/button";
 import { Timeline } from "@prisma/client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -25,21 +26,27 @@ const TimeLineData = () => {
 	return (
 		<main>
 			<AdminHeading>Timeline Data</AdminHeading>
-			<section>
+			<section className="">
 				{timelineData && timelineData.length > 0 ? (
-					<div>
-						{timelineData.map((timeline, index) => (
-							<Link
-								href={`/admin/timeline-data/${timeline.id}`}
-								key={timeline.id}>
-								<TimelineDataList
-									title={timeline.title}
-									desc={timeline.description}
-									date={timeline.date}
-									index={index}
-								/>
-							</Link>
-						))}
+					<div className="relative">
+						<div className="max-h-[25vh] overflow-y-auto p-4 pr-0 relative">
+							{timelineData.map((timeline, index) => (
+								<div key={timeline.id}>
+									<TimelineDataList
+										title={timeline.title}
+										desc={timeline.description}
+										date={timeline.date}
+										index={index}
+										id={timeline.id}
+									/>
+								</div>
+							))}
+						</div>
+						<Link
+							href={"/admin/timeline-data/new"}
+							className="flex items-center justify-center px-2 w-full sm:w-1/2 mx-auto mt-2">
+							<Button className="w-full rounded-full">Add new data</Button>
+						</Link>
 					</div>
 				) : (
 					<HandleNoData

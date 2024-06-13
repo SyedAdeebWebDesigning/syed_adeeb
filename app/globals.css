@@ -64,6 +64,20 @@
 		--input: 217.2 32.6% 17.5%;
 		--ring: 212.7 26.8% 83.9%;
 	}
+
+	:-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+		background-color: transparent;
+	}
+
+	::-webkit-scrollbar {
+		width: 6px;
+		background-color: transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: #00000000;
+	}
 }
 
 @layer base {
