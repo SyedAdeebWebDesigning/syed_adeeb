@@ -19,7 +19,6 @@ export function HorizontalTimeLine({ timelineData }: Props) {
 	const plugin = React.useRef(
 		Autoplay({ delay: delay, stopOnInteraction: false })
 	);
-	const carousel = React.useRef<any>(null);
 
 	return (
 		<Carousel

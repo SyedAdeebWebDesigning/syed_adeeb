@@ -1,5 +1,6 @@
 "use client";
 import { getAboutPageData } from "@/actions/aboutpage.action";
+import Loading from "@/components/loading";
 import AboutHeading from "@/components/shared/AboutHeading";
 import AboutImage from "@/components/shared/AboutImage";
 import Bounded from "@/components/shared/Bounded";
@@ -8,30 +9,39 @@ import { AboutPageData } from "@prisma/client";
 import { useEffect, useState } from "react";
 
 const AboutPage = () => {
-	const [aboutPageData, setAboutPageData] = useState<AboutPageData>();
+	const [aboutPageData, setAboutPageData] = useState<AboutPageData | null>(
+		null
+	);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const result: any = await getAboutPageData();
+				const result: AboutPageData | any = await getAboutPageData();
 				setAboutPageData(result);
 			} catch (error) {
-				console.error("Error fetching home page data:", error);
+				console.error("Error fetching about page data:", error);
+			} finally {
+				setLoading(false);
 			}
 		};
 
 		fetchData();
 	}, []);
 
+	if (loading) {
+		return <Loading />;
+	}
+
 	const firstName = aboutPageData?.name
 		? aboutPageData.name.slice(0, aboutPageData.name.indexOf(" "))
 		: "Syed";
 	const lastName = aboutPageData?.name
-		? aboutPageData.name.slice(aboutPageData.name.indexOf(" "))
+		? aboutPageData.name.slice(aboutPageData.name.indexOf(" ") + 1)
 		: "Adeeb";
-	const message: string | any = aboutPageData?.message
-		? aboutPageData.message
-		: "I am Syed Adeeb, a seasoned full-stack developer specializing in web development since 2020. My focus is on crafting sophisticated and user-centric websites by leveraging my expertise in both front-end and back-end technologies. I am committed to staying updated with the latest advancements in the field to deliver innovative solutions that exceed client expectations.";
+	const message =
+		aboutPageData?.message ||
+		"I am Syed Adeeb, a seasoned full-stack developer specializing in web development since 2020. My focus is on crafting sophisticated and user-centric websites by leveraging my expertise in both front-end and back-end technologies. I am committed to staying updated with the latest advancements in the field to deliver innovative solutions that exceed client expectations.";
 	const imgUrl = aboutPageData?.imgUrl || "/about1.png";
 
 	return (

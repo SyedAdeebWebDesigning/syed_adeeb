@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Timeline } from "@prisma/client";
 
 import { Loader2 } from "lucide-react";
+import Loading from "../loading";
 
 type Props = {
 	timelineData: Timeline[];
@@ -19,13 +20,7 @@ const TimeLine: React.FC<Props> = ({ timelineData }: Props) => {
 	}, [timelineData]);
 
 	if (loading) {
-		return (
-			<div className="container mx-auto h-[60vh] flex justify-center items-center">
-				<div className="grid place-items-center h-full">
-					<Loader2 className="size-16 rotate-infinite text-teal-500" />
-				</div>
-			</div>
-		);
+		return <Loading />;
 	}
 	return (
 		<div className="container mx-auto">
