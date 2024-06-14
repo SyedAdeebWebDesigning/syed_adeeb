@@ -50,3 +50,24 @@ model Timeline {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+model Projects {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  imgUrl      String
+  link        String
+  isFeatured  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Skills {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  projectsId String?  @db.ObjectId
+  title      String
+  imgUrl     String
+  percentage String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}

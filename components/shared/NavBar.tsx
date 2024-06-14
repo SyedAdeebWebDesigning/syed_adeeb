@@ -120,15 +120,17 @@ const NavBar = () => {
 								<ul>
 									{NavLinks.map((link) => (
 										<li key={link.title}>
-											<a
-												href={link.url}
-												className={`link link-underline link-underline-black my-10 flex flex-col ${
-													pathname === `/${link.title.toLowerCase()}`
-														? "bg-gradient-to-tr dark:from-emerald-300 dark:to-emerald-300 dark:bg-emerald-300 from-emerald-500 to-emerald-500 bg-emerald-500"
-														: ""
-												}`}>
-												{link.title}
-											</a>
+											{user?.isAdmin || !link.adminOnly ? (
+												<a
+													href={link.url}
+													className={`link link-underline link-underline-black my-10 flex flex-col ${
+														pathname === `/${link.title.toLowerCase()}`
+															? "bg-gradient-to-tr dark:from-emerald-300 dark:to-emerald-300 dark:bg-emerald-300 from-emerald-500 to-emerald-500 bg-emerald-500"
+															: ""
+													}`}>
+													{link.title}
+												</a>
+											) : null}
 										</li>
 									))}
 								</ul>

@@ -101,11 +101,23 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 			href: "/admin/projects-data",
 			label: "Projects",
 			icon: Folder,
+			extra: [
+				{
+					href: "/admin/projects-data/new",
+					label: "New",
+				},
+			],
 		},
 		{
 			href: "/admin/skills-data",
 			label: "Skills",
 			icon: Package2,
+			extra: [
+				{
+					href: "/admin/skills-data/new",
+					label: "New",
+				},
+			],
 		},
 		{
 			href: "/admin/messages-data",
