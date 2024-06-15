@@ -5,46 +5,63 @@ import {
 	getFeaturedProject,
 	getNonFeaturedProjects,
 } from "@/actions/projects.action";
+import { FollowerPointerCard } from "../ui/following-pointer";
 
-import {
-	HoverCard,
-	HoverCardContent,
-	HoverCardTrigger,
-} from "@/components/ui/hover-card";
 import Link from "next/link";
 import { Projects as ProjectType } from "@prisma/client";
+import Image from "next/image";
 
 // Individual project component
 const ProjectCard: React.FC<{ project: ProjectType; index: number }> = ({
 	project,
 	index,
 }) => (
-	<HoverCard>
-		<HoverCardTrigger>
-			<motion.div
-				className="p-1 rounded-lg shadow-md h-full"
-				initial={{ scale: 0, opacity: 0 }}
-				animate={{ scale: 1, opacity: 1 }}
-				transition={{
-					delay: index * 0.2,
-					type: "spring",
-					stiffness: 50,
-					damping: 10,
-				}}>
-				<Link href={`/projects/${project.id}`}>
-					<picture>
-						<img
-							src={project.imgUrl} // Make sure this path is correct
-							alt={project.title}
-							className={`rounded-lg w-full ${
-								index === 0 ? "h-full" : "h-48"
-							} object-cover object-center`}
-						/>
-					</picture>
-				</Link>
-			</motion.div>
-		</HoverCardTrigger>
-	</HoverCard>
+	<FollowerPointerCard
+		title={
+			<TitleComponent title={project.title} avatar={"/about-data.webp"} />
+		}>
+		<motion.div
+			className="p-1 rounded-lg shadow-md h-full"
+			initial={{ scale: 0, opacity: 0 }}
+			animate={{ scale: 1, opacity: 1 }}
+			transition={{
+				delay: index * 0.2,
+				type: "spring",
+				stiffness: 50,
+				damping: 10,
+			}}>
+			<Link href={`/projects/${project.id}`} className="cursor-none">
+				<picture>
+					<img
+						src={project.imgUrl} // Make sure this path is correct
+						alt={project.title}
+						className={`rounded-lg w-full ${
+							index === 0 ? "h-full" : "h-48"
+						} object-cover object-center`}
+					/>
+				</picture>
+			</Link>
+		</motion.div>
+	</FollowerPointerCard>
+);
+
+const TitleComponent = ({
+	title,
+	avatar,
+}: {
+	title: string;
+	avatar: string;
+}) => (
+	<div className="flex space-x-2 items-center backdrop-blur-xl text-2xl bg-gradient-to-r from-teal-500/60 to-green-500/60 px-2 py-1 rounded-full">
+		<Image
+			src={avatar}
+			height="20"
+			width="20"
+			alt="thumbnail"
+			className="rounded-full border-2 border-white"
+		/>
+		<p className="shadow-xl">{title}</p>
+	</div>
 );
 
 const ProjectCardSkeleton: React.FC<{ index: number }> = ({ index }) => (
