@@ -68,6 +68,7 @@ const NavBar = () => {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}>
 						{NavLinks.map((link, i) => {
+							const isActive = pathname.startsWith(link.url);
 							return (
 								<motion.li
 									key={link.title}
@@ -88,7 +89,7 @@ const NavBar = () => {
 											prefetch
 											href={link.url}
 											className={`link link-underline link-underline-black dark:link-underline-white font-semibold dark:font-normal transition-all duration-300 ease-in-out  ${
-												pathname === `/${link.title.toLowerCase()}`
+												isActive
 													? "bg-gradient-to-tr link-underline-active dark:link-underline-white-active  dark:from-emerald-300 dark:to-emerald-300 dark:bg-emerald-600 from-emerald-600 to-emerald-500 bg-emerald-500"
 													: ""
 											}`}>
@@ -118,21 +119,24 @@ const NavBar = () => {
 							</SheetTrigger>
 							<SheetContent className="bg-white/90 backdrop-blur-md dark:bg-[#1c1c1c]">
 								<ul>
-									{NavLinks.map((link) => (
-										<li key={link.title}>
-											{user?.isAdmin || !link.adminOnly ? (
-												<a
-													href={link.url}
-													className={`link link-underline link-underline-black my-10 flex flex-col ${
-														pathname === `/${link.title.toLowerCase()}`
-															? "bg-gradient-to-tr dark:from-emerald-300 dark:to-emerald-300 dark:bg-emerald-300 from-emerald-500 to-emerald-500 bg-emerald-500"
-															: ""
-													}`}>
-													{link.title}
-												</a>
-											) : null}
-										</li>
-									))}
+									{NavLinks.map((link) => {
+										const isActive = pathname.startsWith(link.url);
+										return (
+											<li key={link.title}>
+												{user?.isAdmin || !link.adminOnly ? (
+													<a
+														href={link.url}
+														className={`link link-underline link-underline-black my-10 flex flex-col ${
+															isActive
+																? "bg-gradient-to-tr dark:from-emerald-300 dark:to-emerald-300 dark:bg-emerald-300 from-emerald-500 to-emerald-500 bg-emerald-500"
+																: ""
+														}`}>
+														{link.title}
+													</a>
+												) : null}
+											</li>
+										);
+									})}
 								</ul>
 							</SheetContent>
 						</Sheet>

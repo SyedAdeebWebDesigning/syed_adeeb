@@ -91,16 +91,30 @@ export const deleteProject = async (id: string) => {
  * Retrieves a list of featured projects.
  * @returns {Promise<Project[]>} A promise that resolves to an array of featured projects.
  */
-export const getFeaturedProjects = async (): Promise<
-	Projects[] | undefined
-> => {
+export const getFeaturedProject = async (): Promise<Projects | any> => {
 	try {
-		const projects = await prismadb.projects.findMany({
+		const projects = await prismadb.projects.findFirst({
 			where: { isFeatured: true },
 		});
 		return projects;
 	} catch (error) {
-		console.error("Error retrieving featured projects:", error);
+		console.error("Error retrieving featured project:", error);
+	}
+	return undefined;
+};
+
+/**
+ * Retrieves a list of non-featured projects.
+ * @returns {Promise<Project[]>} A promise that resolves to an array of non-featured projects.
+ */
+export const getNonFeaturedProjects = async (): Promise<Projects[] | any> => {
+	try {
+		const projects = await prismadb.projects.findMany({
+			where: { isFeatured: false },
+		});
+		return projects;
+	} catch (error) {
+		console.error("Error retrieving non-featured projects:", error);
 	}
 	return undefined;
 };

@@ -64,9 +64,15 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 		window.location.href = "/";
 	};
 
-	// Function to toggle active state of the extra links
-	const toggleActiveLink = (href: string) => {
-		setActiveExtra((prevActiveLink) => (prevActiveLink === href ? null : href));
+	// Function to check if a route or its subroutes are active
+	const isActiveRoute = (route: string, subroutes?: string[]) => {
+		if (pathname === route) return true;
+		if (
+			subroutes &&
+			subroutes.some((subroute) => pathname.startsWith(subroute))
+		)
+			return true;
+		return false;
 	};
 
 	// Define the routes
@@ -188,12 +194,10 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 										href={route.href}
 										className={cn(
 											"group flex p-3 w-full justify-start font-medium mt-5 bg-gradient-to-r hover:from-teal-500 hover:to-transparent cursor-pointer hover:text-primary  rounded-lg transition",
-											pathname === route.href ||
-												activeExtra === route.href ||
-												(route.extra &&
-													route.extra.some(
-														(subroute) => pathname === subroute.href
-													))
+											isActiveRoute(
+												route.href,
+												route.extra?.map((extra) => extra.href)
+											)
 												? "bg-gradient-to-r text-gray-700 from-teal-500 to-transparent"
 												: ""
 										)}>
@@ -209,9 +213,11 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 									</Link>
 
 									{/* Extra Subroutes */}
-									{pathname.startsWith(route.href) &&
-										route.extra &&
-										route.extra.map((subroute) => (
+									{isActiveRoute(
+										route.href,
+										route.extra?.map((extra) => extra.href)
+									) &&
+										route.extra?.map((subroute) => (
 											<Link
 												href={subroute.href}
 												key={subroute.href}
