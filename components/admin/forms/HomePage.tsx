@@ -1,22 +1,21 @@
 "use client";
+import React, { useEffect, useState } from "react";
+import CustomInput from "@/components/shared/input";
+import { Button } from "@/components/ui/button";
+import { SocialIcon } from "react-social-icons";
+import { RxCross2 } from "react-icons/rx";
+import { toast } from "@/components/ui/use-toast";
 import {
 	createHomePageData,
 	getHomePageData,
 	updateHomePageData,
 } from "@/actions/homepage.action";
-import CustomInput from "@/components/shared/input";
-import { Button } from "@/components/ui/button";
-import React, { useEffect, useState } from "react";
-import { SocialIcon } from "react-social-icons";
-import { toast } from "@/components/ui/use-toast";
 import {
 	createSocialIcon,
 	deleteSocialIcon,
 	getSocialIcons,
 } from "@/actions/socialIcons.action";
 import { HomePageData, SocialIcons } from "@prisma/client";
-import { RxCross2 } from "react-icons/rx";
-import { useRouter } from "next/navigation";
 
 /**
  * HomePage component
@@ -29,8 +28,7 @@ const HomePage: React.FC = (): JSX.Element => {
 	const [socialLinks, setSocialLinks] = useState<string>("");
 	const [socialIcons, setSocialIcons] = useState<SocialIcons[]>([]);
 	const [homePageData, setHomePageData] = useState<HomePageData | null>(null);
-
-	const router = useRouter();
+	const [isLoading, setIsLoading] = useState(true);
 
 	/**
 	 * Fetches home page data and social icons data when the component mounts.
@@ -49,6 +47,8 @@ const HomePage: React.FC = (): JSX.Element => {
 				}
 			} catch (error) {
 				console.error("Error fetching data:", error);
+			} finally {
+				setIsLoading(false);
 			}
 		};
 		fetchData();
@@ -115,6 +115,10 @@ const HomePage: React.FC = (): JSX.Element => {
 		}
 	};
 
+	if (isLoading) {
+		return <SkeletonLoader />;
+	}
+
 	return (
 		<form className="justify-center flex" onSubmit={handleSubmit}>
 			<div className="w-1/2 flex flex-col justify-center my-10 space-y-2">
@@ -179,6 +183,41 @@ const HomePage: React.FC = (): JSX.Element => {
 				</div>
 			</div>
 		</form>
+	);
+};
+
+const SkeletonLoader: React.FC = () => {
+	return (
+		<div className="animate-pulse flex flex-col space-y-4 p-4 w-1/2 mx-auto my-1">
+			{/* First Name and Last Name */}
+			<div className="flex space-x-2">
+				<div className="h-10 bg-gray-300 dark:bg-[#232323] rounded w-1/2"></div>
+				<div className="h-10 bg-gray-300 dark:bg-[#232323] rounded w-1/2"></div>
+			</div>
+
+			{/* Tagline */}
+			<div className="h-10 bg-gray-300 dark:bg-[#232323] rounded w-full"></div>
+
+			{/* Submit Button */}
+			<div className="h-10 bg-gray-300 dark:bg-[#232323] rounded w-full"></div>
+
+			{/* Social Link and Add Button */}
+			<div className="flex space-x-2">
+				<div className="h-10 bg-gray-300 dark:bg-[#232323] rounded w-3/4"></div>
+				<div className="h-10 bg-gray-300 dark:bg-[#232323] rounded w-1/4"></div>
+			</div>
+
+			{/* Social Icons */}
+			<div className="grid md:grid-cols-3 sm:grid-cols-3 grid-cols-2 gap-2 xl:grid-cols-8">
+				{Array(8)
+					.fill(0)
+					.map((_, index) => (
+						<div
+							key={index}
+							className="size-12 bg-gray-300 dark:bg-[#232323] rounded-full"></div>
+					))}
+			</div>
+		</div>
 	);
 };
 
