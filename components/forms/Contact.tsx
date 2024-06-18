@@ -4,6 +4,8 @@ import { Textarea } from "@/components/ui/textarea";
 import CustomInput from "../shared/input";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
+import { createMessage } from "@/actions/messages.action";
+import { toast } from "../ui/use-toast";
 
 type Props = {};
 
@@ -11,13 +13,34 @@ const Contact = (props: Props) => {
 	const [email, setEmail] = useState("");
 	const [name, setName] = useState("");
 	const [message, setMessage] = useState("");
-
+	const [messageStatus, setMessageStatus] = useState<
+		"initial" | "sending" | "sended"
+	>("initial");
 	const maxLength = 500;
 	const minLength = 5;
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		setMessageStatus("sending");
+		try {
+			const data = { name: name, email: email, suggestion: message };
+			await createMessage(data);
+			toast({ description: "Message sent successfully", variant: "default" });
+			setMessageStatus("sended");
+		} catch (error: any) {
+			toast({ description: error.message, variant: "destructive" });
+			console.log(error.message);
+		} finally {
+			setEmail("");
+			setName("");
+			setMessage("");
+			setMessageStatus("initial");
+		}
+	};
 	return (
 		<div className="container px-5 py-24 mx-auto">
 			<div className="lg:w-1/2 md:w-2/3 mx-auto">
-				<form className="flex flex-wrap -m-2">
+				<form className="flex flex-wrap -m-2" onSubmit={handleSubmit}>
 					<div className="p-2 w-1/2">
 						<motion.div
 							className="relative"
@@ -103,9 +126,10 @@ const Contact = (props: Props) => {
 								!name ||
 								!message ||
 								message.length < minLength ||
-								message.length > maxLength
+								message.length > maxLength ||
+								messageStatus === "sending"
 							}>
-							Send Message
+							{messageStatus === "sending" ? "Sending..." : "Send Message"}
 						</Button>
 					</motion.div>
 				</form>

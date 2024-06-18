@@ -6,7 +6,9 @@ type Props = {
 	type: string;
 	id: string;
 	name: string;
-	value?: string;
+	value?: string | number | any;
+	min?: number | any;
+	max?: number | any;
 	className?: string;
 	onChange?: (e: any) => void;
 	isRequired?: boolean;
@@ -20,6 +22,8 @@ const CustomInput = ({
 	onChange,
 	className,
 	isRequired,
+	min,
+	max,
 }: Props) => {
 	return (
 		<Input
@@ -28,6 +32,8 @@ const CustomInput = ({
 			required={isRequired}
 			name={name}
 			value={value}
+			min={min}
+			max={max}
 			onChange={onChange}
 			placeholder={name.charAt(0).toUpperCase() + name.slice(1)}
 			className={cn(

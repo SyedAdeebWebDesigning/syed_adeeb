@@ -27,20 +27,6 @@ const StyledCircle = styled(motion.circle)`
 	transform-origin: 50% 50%;
 `;
 
-const ImageOverlay = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(255, 255, 255, 0.8);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	opacity: 0;
-	transition: opacity 0.3s ease;
-`;
-
 const GradientCircleProgressbar = ({
 	percentage,
 	width,
@@ -50,6 +36,7 @@ const GradientCircleProgressbar = ({
 	fontFamily,
 	primaryColor,
 	secondaryColor,
+	title,
 	fill,
 	hidePercentageText,
 	strokeLinecap,
@@ -68,7 +55,7 @@ const GradientCircleProgressbar = ({
 	useEffect(() => {
 		circleControls.start({
 			strokeDashoffset: offset,
-			transition: { type: "spring", stiffness: 100, damping: 10 },
+			transition: { type: "tween", duration: 1, ease: "easeInOut" },
 		});
 	}, [offset, circleControls]);
 
@@ -89,7 +76,7 @@ const GradientCircleProgressbar = ({
 			}}>
 			{!hidePercentageText && (
 				<PercentageContainer>
-					<div className="relative text-center">
+					<div className="relative text-center mx-auto">
 						<Image
 							src={imageUrl}
 							alt="Progress Image"
@@ -99,11 +86,11 @@ const GradientCircleProgressbar = ({
 							objectFit="contain"
 						/>
 
-						<p className="text-4xl font-semibold w-full h-full bg-emerald-500 backdrop-blur-md rounded-full opacity-0 hover:opacity-100 transition-all duration-150 ease-in-out absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]  text-center">
-							<span className="text-center absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
-								{percentage}
-							</span>
-						</p>
+						<div className="text-4xl font-semibold w-full h-full bg-emerald-500 backdrop-blur-md rounded-full opacity-0 hover:opacity-100 transition-all duration-150 ease-in-out absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]  text-center">
+							<div className="text-center absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
+								{percentage}%<div className="text-sm">{title}</div>
+							</div>
+						</div>
 					</div>
 				</PercentageContainer>
 			)}
@@ -137,6 +124,7 @@ const GradientCircleProgressbar = ({
 					strokeDasharray={`${circumference} ${circumference}`}
 					initial={{ strokeDashoffset: circumference }}
 					animate={circleControls}
+					transition={{ type: "tween", duration: 1, ease: "easeInOut" }}
 					transform="rotate(-90, 0, 0)"
 				/>
 			</svg>
