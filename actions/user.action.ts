@@ -156,3 +156,26 @@ export const signIn = async ({
 		throw new Error(error.message);
 	}
 };
+
+export const toggleUserRoles = async (id: string) => {
+	try {
+		const user = await prismadb.user.findUnique({
+			where: {
+				id,
+			},
+		});
+
+		if (user) {
+			await prismadb.user.update({
+				where: {
+					id,
+				},
+				data: {
+					isAdmin: !user.isAdmin,
+				},
+			});
+		}
+	} catch (error) {
+		console.log("Error toggling user roles");
+	}
+};

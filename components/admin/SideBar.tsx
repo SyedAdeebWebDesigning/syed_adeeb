@@ -39,6 +39,14 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 			return;
 		}
 
+		if (user?.isAdmin === false) {
+			toast({
+				description: "You do not have permission to access this page",
+				variant: "default",
+			});
+			window.location.href = "/";
+		}
+
 		const email: any = findEmailInToken(token);
 		if (!email) {
 			toast({ description: "User not signed in", variant: "default" });
@@ -55,7 +63,7 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 		};
 
 		fetchUser();
-	}, []);
+	}, [user?.isAdmin]);
 
 	// Handle logout function
 	const handleLogout = () => {
