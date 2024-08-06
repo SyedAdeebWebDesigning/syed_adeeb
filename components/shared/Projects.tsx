@@ -212,54 +212,60 @@ const Projects: React.FC = () => {
 
 						<Link href={activeProject.link}>
 							<motion.div
-								className="fixed inset-0 m-auto w-[90vw] md:w-[70vw] lg:w-[50vw] h-[70vh] md:h-[60vh] lg:h-[50vh] rounded-2xl shadow-lg backdrop-blur-3xl bg-cover bg-center z-50"
-								style={{ backgroundImage: `url(${activeProject.imgUrl})` }}
+								className="fixed inset-0 m-auto w-[90vw] md:w-[70vw] lg:w-[50vw] h-[70vh] md:h-[60vh] lg:h-[50vh] rounded-2xl shadow-lg bg-cover bg-center z-50"
 								initial={{ scale: 0.8, opacity: 0 }}
 								animate={{ scale: 1, opacity: 1 }}
 								exit={{ scale: 0.8, opacity: 0 }}
 								ref={modalRef}>
-								<div className="relative flex items-end h-full w-full">
-									<div className="absolute top-2 right-2 md:hidden">
+								<div className="relative flex items-end h-full w-full	">
+									<Image
+										src={activeProject.imgUrl}
+										fill
+										alt=""
+										className=""
+										objectFit="cover"
+									/>
+									<div className=" z-0 top-2 right-2 md:hidden">
 										<button onClick={() => setIsActive(false)}>
 											<X size={30} />
 										</button>
 									</div>
-									<div className="shadow-dark w-full p-4 bg-gradient-to-b from-transparent to-[#1c1c1cc0] backdrop-blur-sm rounded-b-2xl">
-										<motion.h2
-											initial={{ scale: 0.8, opacity: 0 }}
-											animate={{
-												scale: 1,
-												opacity: 1,
-												transition: {
-													delay: 0.5,
-													type: "spring",
-													stiffness: 50,
-													damping: 10,
-												},
-											}}
-											exit={{ scale: 0.8, opacity: 0 }}
-											className="font-bold text-white text-2xl uppercase line-clamp-1"
-											style={{ textShadow: "2px 2px 10px black" }}>
-											{activeProject.title}
-										</motion.h2>
-										<motion.p
-											initial={{ scale: 0.8, opacity: 0 }}
-											animate={{
-												scale: 1,
-												opacity: 1,
-												transition: {
-													delay: 0.8,
-													type: "spring",
-													stiffness: 50,
-													damping: 10,
-												},
-											}}
-											exit={{ scale: 0.8, opacity: 0 }}
-											className="text-gray-100 text-lg line-clamp-3 xl:ml-4"
-											style={{ textShadow: "1px 1px 1px black" }}>
-											{activeProject.description}
-										</motion.p>
-									</div>
+								</div>
+								<div className="w-full p-4 bg-[#1c1c1c] rounded-b-2xl">
+									<motion.h2
+										initial={{ scale: 0.8, opacity: 0 }}
+										animate={{
+											scale: 1,
+											opacity: 1,
+											transition: {
+												delay: 0.5,
+												type: "spring",
+												stiffness: 50,
+												damping: 10,
+											},
+										}}
+										exit={{ scale: 0.8, opacity: 0 }}
+										className="font-bold text-white text-2xl uppercase line-clamp-1"
+										style={{ textShadow: "2px 2px 10px black" }}>
+										{activeProject.title}
+									</motion.h2>
+									<motion.p
+										initial={{ scale: 0.8, opacity: 0 }}
+										animate={{
+											scale: 1,
+											opacity: 1,
+											transition: {
+												delay: 0.8,
+												type: "spring",
+												stiffness: 50,
+												damping: 10,
+											},
+										}}
+										exit={{ scale: 0.8, opacity: 0 }}
+										className="text-gray-100 text-lg line-clamp-3"
+										style={{ textShadow: "1px 1px 1px black" }}>
+										{activeProject.description}
+									</motion.p>
 								</div>
 							</motion.div>
 						</Link>
