@@ -105,7 +105,7 @@ const HeroSection = ({ socialIcons, homePageData }: Props) => {
 					</span>
 					<TextGenerateEffect
 						words={
-							"I am Mohammad Shoaib Khan, a full-stack developer specializing in web development since 2022. I build user-centric websites with expertise in front-end and back-end technologies, staying updated to deliver innovative solutions that exceed expectations."
+							"I am Mohammad Shoaib Khan, a full-stack developer specializing in web development since 2024. I build user-centric websites with expertise in front-end and back-end technologies, staying updated to deliver innovative solutions that exceed expectations."
 						}
 					/>
 					<ul className="flex space-x-4 items-center w-full mt-3 justify-start">
