@@ -46,7 +46,7 @@ const AboutHeading = ({ firstName, lastName, message }: Props) => {
 						duration: 3.2,
 					},
 				}}>
-				<TypewriterEffectSmooth words={words} />
+				{/* <TypewriterEffectSmooth words={words} /> */}
 				<TextGenerateEffect words={about} />
 			</motion.div>
 		</div>

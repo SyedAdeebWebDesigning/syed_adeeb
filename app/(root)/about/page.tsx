@@ -35,13 +35,13 @@ const AboutPage = () => {
 
 	const firstName = aboutPageData?.name
 		? aboutPageData.name.slice(0, aboutPageData.name.indexOf(" "))
-		: "Syed";
+		: "Mohammad Shoaib";
 	const lastName = aboutPageData?.name
 		? aboutPageData.name.slice(aboutPageData.name.indexOf(" ") + 1)
 		: "Adeeb";
 	const message =
 		aboutPageData?.message ||
-		"I am Syed Adeeb, a seasoned full-stack developer specializing in web development since 2020. My focus is on crafting sophisticated and user-centric websites by leveraging my expertise in both front-end and back-end technologies. I am committed to staying updated with the latest advancements in the field to deliver innovative solutions that exceed client expectations.";
+		"I am Mohammad Shoaib Khan, a full-stack developer specializing in web development since 2022. I build user-centric websites with expertise in front-end and back-end technologies, staying updated to deliver innovative solutions that exceed expectations.";
 	const imgUrl = aboutPageData?.imgUrl || "/about1.png";
 
 	return (

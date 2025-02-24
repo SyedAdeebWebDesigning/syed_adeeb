@@ -157,7 +157,7 @@ export const SideBar = ({ isMobile }: { isMobile?: boolean }) => {
 						{/* Logo */}
 						<Link href={"/"} className="flex justify-center mb-10">
 							<Image
-								src={"/logoWhite.png"}
+								src={"/shoaib-white.webp"}
 								alt="Syed Adeeb"
 								width={200}
 								height={100}

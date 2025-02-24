@@ -35,7 +35,7 @@ const NavBar = () => {
 	const [theme, setThemes] = useState<Theme>("light");
 	// Function to determine the appropriate logo based on the theme
 	const getLogoSource = () => {
-		return theme === "light" ? "/logoBlack.png" : "/logoWhite.png";
+		return theme === "light" ? "/shoaib-black.webp" : "/shoaib-white.webp";
 	};
 
 	const pathname = usePathname();

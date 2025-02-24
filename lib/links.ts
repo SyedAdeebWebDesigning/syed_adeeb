@@ -1,10 +1,5 @@
 export const NavLinks = [
 	{
-		title: "About",
-		url: "/about",
-		adminOnly: false,
-	},
-	{
 		title: "Timeline",
 		url: "/timeline",
 		adminOnly: false,
